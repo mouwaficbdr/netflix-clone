@@ -1,4 +1,4 @@
-import Jumbotron from '../components/jumbotron';
+import {Jumbotron} from '../components';
 import jumboData from '../fixtures/jumbos.json';
 
 export function JumbotronContainer() {
