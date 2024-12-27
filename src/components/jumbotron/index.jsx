@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-/* eslint-disable react/jsx-no-undef */
 import {Inner, Item, Container, Title, SubTitle, Image, Pane} from "./styles/jumbotron"
 
 export default function Jumbotron({children, direction = 'row', ...restProps}) {
