@@ -23,7 +23,7 @@ export function FooterContainer() {
 
         <Footer.Column>
           <Footer.Link href="#">Account</Footer.Link>
-          <Footer.Link href="#">Reddem gift cards</Footer.Link>
+          <Footer.Link href="#">Reedem gift cards</Footer.Link>
           <Footer.Link href="#">Privacy</Footer.Link>
           <Footer.Link href="#">Speed Test</Footer.Link>
         </Footer.Column>
