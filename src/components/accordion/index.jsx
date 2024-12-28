@@ -1,6 +1,8 @@
 /* eslint-disable react/prop-types */
-import { useState } from "react"
+import { useState, useContext, createContext } from "react"
 import { Body, Title, Header, Container, Inner, Item, Frame } from './styles/accordion'
+
+const ToggleContext = createContext();
 
 export default function Accordion({children, ...restProps}) {
   return (
@@ -15,14 +17,33 @@ Accordion.Frame = function AccordionFrame({ children, ...restProps }) {
   return <Frame {...restProps}>{children}</Frame>
 }
 Accordion.Item = function AccordionItem({ children, ...restProps }) {
-  return <Item {...restProps}>{children}</Item>
+  const [toggleShow, setToggleShow] = useState(false)
+
+  return (
+    <ToggleContext.Provider value= {{toggleShow, setToggleShow}}>
+      <Item {...restProps}>{children}</Item>
+    </ToggleContext.Provider>
+  )
 }
 Accordion.Title = function AccordionTitle({ children, ...restProps }) {
   return <Title {...restProps}>{children}</Title>
 }
 Accordion.Header = function AccordionHeader({ children, ...restProps }) {
-  return <Header {...restProps}>{children}</Header>
+  const { toggleShow, setToggleShow } = useContext(ToggleContext)
+
+  return (
+    <Header onClick={() => setToggleShow(!toggleShow)} {...restProps}>
+      {children}
+      {toggleShow ? (
+        <img src="/images/icons/close-slim.png" alt="Close" />
+      ) : (
+        <img src="/images/icons/add.png" alt="Close" />
+      )}
+    </Header>
+  );
+    
 }
 Accordion.Body = function AccordionBody({ children, ...restProps }) {
-  return <Body {...restProps}>{children}</Body>
+  const {toggleShow} = useContext(ToggleContext)
+  return toggleShow ? <Body {...restProps}>{children}</Body> : null
 }
