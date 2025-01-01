@@ -2,6 +2,7 @@ import styled from "styled-components"
 import { Link as ReachRouterLink } from 'react-router-dom'
 
 export const Background = styled.div`
+  margin: -8px;
   display: flex;
   flex-direction: column;
   background: url(${({ src }) => (src ? '../images/misc/${src}.jpg' : '../images/misc/home-bg.jpg')}) top left / cover no-repeat;
