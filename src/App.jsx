@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import * as ROUTES from './constants/routes'
-import { Home, Signin } from './pages'
+import { Home, Signin, Signup } from './pages'
 
 export default function App() {
   return (
@@ -12,7 +12,7 @@ export default function App() {
         />
         <Route
           path={ROUTES.SIGN_UP}
-          element={<p>I will be the sign up page</p>}
+          element={<Signup />}
         />
         <Route
           path={ROUTES.BROWSE}
