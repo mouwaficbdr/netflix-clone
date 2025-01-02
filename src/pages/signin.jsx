@@ -3,14 +3,18 @@ import { HeaderContainer } from "../containers/header"
 import { Form } from "../components"
 
 export default function Signin() {
-  const [error, setError] = useState('');
-  const [emailAddress, setEmailAddress] = useState("")
-  const [password, setPassword] = useState("")
+  const [error, setError] = useState('')
+  const [emailAddress, setEmailAddress] = useState('')
+  const [password, setPassword] = useState('')
+
+  const isInvalid = emailAddress === "" | password === ""
 
   const handleSignin = (event) => {
     event.preventDefault();
 
+
   }
+
   return (
     <HeaderContainer>
       <Form>
@@ -19,7 +23,7 @@ export default function Signin() {
 
         <Form.Base onSubmit={handleSignin} method="POST">
           <Form.Input
-            placeholder="Email Adress"
+            placeholder="Email Address"
             value={emailAddress}
             onChange={({ target }) => setEmailAddress(target.value)}
           />
@@ -30,7 +34,7 @@ export default function Signin() {
             value={password}
             onChange={({ target }) => setPassword(target.value)}
           />
-          <Form.Submit disabled={false} type="submit">
+          <Form.Submit disabled={isInvalid} type="submit">
             Sign In
           </Form.Submit>
 
