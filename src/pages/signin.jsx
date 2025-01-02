@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { HeaderContainer } from "../containers/header"
+import { FooterContainer } from "../containers/footer"
 import { Form } from "../components"
 
 export default function Signin() {
@@ -16,6 +17,8 @@ export default function Signin() {
   }
 
   return (
+    <>
+    
     <HeaderContainer>
       <Form>
         <Form.Title>Sign In</Form.Title>
@@ -47,5 +50,7 @@ export default function Signin() {
         </Form.Base>
       </Form>
     </HeaderContainer>
+    <FooterContainer />
+    </>
   );
 }
