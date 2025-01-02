@@ -6,12 +6,12 @@ import { initializeApp } from 'firebase/app';
 import { FirebaseContext } from './context/firebase.jsx';
 
 const config = {
-  apiKey: 'AIzaSyC_BC2ov54e0IjiUwIjZiEY4MUyZEEyeao',
-  authDomain: 'netflix-clone-1adf4.firebaseapp.com',
-  projectId: 'netflix-clone-1adf4',
-  storageBucket: 'netflix-clone-1adf4.firebasestorage.app',
-  messagingSenderId: '739993842657',
-  appId: '1:739993842657:web:60f540c741f3be777bd8a0',
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
 };
 
 const firebase = initializeApp(config)
