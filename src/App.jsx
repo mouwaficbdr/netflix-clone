@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import * as ROUTES from './constants/routes'
-import Home from "./pages/home"
+import { Home, Signin } from './pages'
 
 export default function App() {
   return (
@@ -8,7 +8,7 @@ export default function App() {
       <Routes>
         <Route
           path={ROUTES.SIGN_IN}
-          element={<p>I will be the sign in page</p>}
+          element={<Signin />}
         />
         <Route
           path={ROUTES.SIGN_UP}
