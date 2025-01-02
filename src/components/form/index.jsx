@@ -9,6 +9,7 @@ export default function Form({ children, ...restProps }) {
 Form.Base = function FormBase({ children, ...restProps }) {
   return <Base {...restProps}>{children}</Base>
 }
+
 Form.Error = function FormError({ children, ...restProps }) {
   return <Error {...restProps}>{children}</Error>
 }
