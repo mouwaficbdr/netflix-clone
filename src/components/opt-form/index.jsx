@@ -16,10 +16,10 @@ OptForm.Button = function OptFormButton({ children, ...restProps }) {
   </Button>
 }
 
-
 OptForm.Break = function OptFormBreak({...restProps }) {
   return <Break {...restProps} />
 }
+
 OptForm.Text = function OptFormText({ children, ...restProps }) {
   return <Text {...restProps}>{children}</Text>
 }
