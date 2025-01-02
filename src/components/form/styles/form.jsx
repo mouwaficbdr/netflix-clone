@@ -69,6 +69,7 @@ export const Input = styled.input`
   line-height: 50px;
   padding: 5px 20px;
   margin-bottom: 20px;
+  font-size: 16px;
 
   &:last-of-type {
     margin-bottom: 30px;
