@@ -20,6 +20,7 @@ export const Input = styled.input`
   padding: 10px;
   height: 70px;
   box-sizing: border-box;
+  font-size: 20px;
 `
 
 export const Button = styled.button`
