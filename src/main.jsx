@@ -18,7 +18,7 @@ const firebase = initializeApp(config)
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <FirebaseContext.Provider value={{ firebase: window.firebase }}>
+    <FirebaseContext.Provider value={{ firebase }}>
       <GlobalStyles />
       <App />
     </FirebaseContext.Provider>
