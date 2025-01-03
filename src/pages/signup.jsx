@@ -1,20 +1,39 @@
-import { useState } from "react"
-import { HeaderContainer } from "../containers/header"
-import { FooterContainer } from "../containers/footer"
-import { Form } from '../components'
-import * as ROUTES from '../constants/routes'
+import { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { HeaderContainer } from '../containers/header';
+import { FooterContainer } from '../containers/footer';
+import { Form } from '../components';
+import * as ROUTES from '../constants/routes';
+import { FirebaseContext } from '../context/firebase';
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 
 export default function Signup() {
+  const navigate = useNavigate()
+  const { auth } = useContext(FirebaseContext)
   const [firstName, setFirstName] = useState('')
   const [emailAddress, setEmailAddress] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
 
-  const isInvalid = firstName === "" | emailAddress === "" | password === "" 
+  const isInvalid = firstName === '' || emailAddress === '' || password === '';
 
   const handleSignup = (event) => {
-    event.preventDefault()
-  }
+    event.preventDefault();
+    createUserWithEmailAndPassword(auth, emailAddress, password)
+      .then((result) =>
+        updateProfile(result.user, {
+            displayName: firstName,
+            photoURL: Math.floor(Math.random() * 5) + 1,
+          })
+          .then(() => {
+            setEmailAddress('');
+            setPassword('');
+            setError('');
+            navigate(ROUTES.BROWSE);
+          })
+    ).catch((error) => setError(error.message)
+    );
+  };
 
   return (
     <>
@@ -42,7 +61,7 @@ export default function Signup() {
               onChange={({ target }) => setPassword(target.value)}
             />
             <Form.Submit disabled={isInvalid} type="submit">
-              Sign In
+              Sign Up
             </Form.Submit>
 
             <Form.Text>
