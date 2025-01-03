@@ -5,10 +5,10 @@ export const Background = styled.div`
   margin: -8px;
   display: flex;
   flex-direction: column;
-  background: url(${({ src }) => (src ? '../images/misc/${src}.jpg' : '../images/misc/home-bg.jpg')}) top left / cover no-repeat;
+  background: url(${({ src }) => (src ? `../images/misc/${src}.jpg` : '../images/misc/home-bg.jpg')}) top left / cover no-repeat;
   
   @media (max-width: 1100px) {
-    ${({dontShowOnSmallViewport}) => dontShowOnSmallViewport && "background: none"};
+    ${({dontShowOnSmallViewPort}) => dontShowOnSmallViewPort && "background: none"};
   }
 `
 
@@ -72,4 +72,16 @@ export const Logo = styled.img`
       height: 45px;
       width: 167px;
     }
+`
+
+export const Group = styled.div`
+  display: flex;
+  align-items: center;
+`
+
+export const Text = styled.p`
+  color: white;
+  font-size: 22px;
+  line-height: normal;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.45);
 `
