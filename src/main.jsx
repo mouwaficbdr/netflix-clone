@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { GlobalStyles } from './global-styles.jsx';
 import App from './App.jsx';
 import { initializeApp } from 'firebase/app';
+import { getAuth } from 'firebase/auth';
 import { FirebaseContext } from './context/firebase.jsx';
 
 const config = {
@@ -15,10 +16,11 @@ const config = {
 };
 
 const firebase = initializeApp(config)
+const auth = getAuth(firebase)
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <FirebaseContext.Provider value={{ firebase }}>
+    <FirebaseContext.Provider value={{ firebase, auth }}>
       <GlobalStyles />
       <App />
     </FirebaseContext.Provider>
