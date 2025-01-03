@@ -4,7 +4,7 @@ import * as ROUTES from "../constants/routes"
 import { FirebaseContext } from "../context/firebase"
 import { SelectProfileContainer } from "./profiles"
 import { FooterContainer } from "./footer"
-
+import { signOut } from "firebase/auth"
 
 export function BrowseContainer() {
   const [profile, setProfile] = useState({})
@@ -43,6 +43,18 @@ export function BrowseContainer() {
           </Header.Group>
           <Header.Group>
             <Header.Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+            <Header.Profile>
+              <Header.Picture src={ user.photoURL } />
+              <Header.Dropdown>
+                <Header.Group>
+                  <Header.Picture src={user.photoURL} />
+                  <Header.Link>{user.displayName}</Header.Link>
+                </Header.Group>
+                <Header.Group>
+                  <Header.Link onClick={()=>signOut()} >Sign out</Header.Link>
+                </Header.Group>
+              </Header.Dropdown>
+            </Header.Profile>
           </Header.Group>
         </Header.Frame>
   
