@@ -10,6 +10,7 @@ export const Container = styled.div`
 `;
 
 export const PageWrapper = styled.div`
+  padding: 0;
   height: 100vh;
   display: flex;
   flex-direction: column;
