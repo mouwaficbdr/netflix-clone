@@ -1,8 +1,12 @@
 /* eslint-disable react/prop-types */
-import { Container, Title, List, Item, Picture, Name } from "./styles/profiles"
+import { Container, Title, List, Item, Picture, Name, PageWrapper } from "./styles/profiles"
 
 export default function Profiles({ children, ...restProps }) {
   return <Container {...restProps}>{children}</Container>
+}
+
+Profiles.PageWrapper = function ProfilesPageWrapper({ children, ...restProps }) {
+  return <PageWrapper {...restProps}>{children}</PageWrapper>
 }
 
 Profiles.Title = function ProfilesTitle({ children, ...restProps }) {

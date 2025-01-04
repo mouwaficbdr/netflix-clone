@@ -4,7 +4,7 @@ import * as ROUTES from '../constants/routes'
 
 export function SelectProfileContainer({ user, setProfile }) {
   return (
-    <>
+    <Profiles.PageWrapper>
       <Header bg={false}>
         <Header.Frame>
           <Header.Logo to={ROUTES.HOME}
@@ -27,6 +27,6 @@ export function SelectProfileContainer({ user, setProfile }) {
           </Profiles.User>
         </Profiles.List>
       </Profiles>
-    </>
+    </Profiles.PageWrapper>
   )
 }
