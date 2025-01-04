@@ -5,9 +5,11 @@ export const Background = styled.div`
   margin: -8px;
   display: flex;
   flex-direction: column;
-  background: url(${({ src }) =>
-      src ? `../images/misc/${src}.jpg` : '../images/misc/home-bg.jpg'})
-    top left / cover no-repeat;
+  background: ${({ src }) =>
+    src
+      ? `url('/images/misc/${src}.jpg') top left / cover no-repeat`
+      : `url('/images/misc/home-bg.jpg') top left / cover no-repeat`
+      };
 
   @media (max-width: 1100px) {
     ${({ dontShowOnSmallViewPort }) =>
