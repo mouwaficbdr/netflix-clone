@@ -3,14 +3,16 @@ import styled from 'styled-components';
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  margin: auto;
+  margin: 50px auto 0;
   max-width: 80%;
+  flex: 1;
 `;
 
 export const PageWrapper = styled.div`
   height: 100vh;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const Title = styled.h1`
