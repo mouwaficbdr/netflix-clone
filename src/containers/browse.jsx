@@ -28,9 +28,10 @@ export function BrowseContainer({ slides }) {
     setSlideRows(slides[category])
   }, [slides, category])
 
+
   return profile.displayName ? (
     <>
-      { loading ? <Loading src={user.photoURL} /> : <Loading.ReleaseBody /> }
+      {loading ? <Loading src={user.photoURL} /> : <Loading.ReleaseBody />}
       <Header src="joker1" dontShowOnSmallViewPort>
         <Header.Frame>
           <Header.Group>
@@ -53,22 +54,25 @@ export function BrowseContainer({ slides }) {
             </Header.Link>
           </Header.Group>
           <Header.Group>
-            <Header.Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+            <Header.Search
+              searchTerm={searchTerm}
+              setSearchTerm={setSearchTerm}
+            />
             <Header.Profile>
-              <Header.Picture src={ user.photoURL } />
+              <Header.Picture src={user.photoURL} />
               <Header.Dropdown>
                 <Header.Group>
                   <Header.Picture src={user.photoURL} />
                   <Header.Link>{user.displayName}</Header.Link>
                 </Header.Group>
                 <Header.Group>
-                  <Header.Link onClick={()=>signOut()} >Sign out</Header.Link>
+                  <Header.Link onClick={() => signOut()}>Sign out</Header.Link>
                 </Header.Group>
               </Header.Dropdown>
             </Header.Profile>
           </Header.Group>
         </Header.Frame>
-  
+
         <Header.Feature>
           <Header.FeatureCallOut>Watch Joker Now</Header.FeatureCallOut>
           <Header.Text>
@@ -81,12 +85,13 @@ export function BrowseContainer({ slides }) {
           <Header.PlayButton>Play</Header.PlayButton>
         </Header.Feature>
       </Header>
+
       <Card.Group>
-        {slideRows.map((slideItem) => {
-          <Card key={`${category}-${slideItem.title}.toLowerCase()`}>
+        {slideRows.map((slideItem) => (
+          <Card key={`${category}-${slideItem.title.toLowerCase()}`}>
             <Card.Title>{slideItem.title}</Card.Title>
             <Card.Entities>
-              {slideItem.data.map((item) => {
+              {slideItem.data.map((item) => (
                 <Card.Item key={item.docId} item={item}>
                   <Card.Image
                     src={`/images/${category}/${item.genre}/${item.slug}/small.jpg`}
@@ -95,11 +100,11 @@ export function BrowseContainer({ slides }) {
                     <Card.SubTitle>{item.title}</Card.SubTitle>
                     <Card.Text>{item.description}</Card.Text>
                   </Card.Meta>
-                </Card.Item>;
-              })}
+                </Card.Item>
+              ))}
             </Card.Entities>
           </Card>
-        })}
+        ))}
       </Card.Group>
 
       <FooterContainer />
