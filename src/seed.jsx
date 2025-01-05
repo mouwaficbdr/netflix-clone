@@ -1,5 +1,4 @@
-import { getFirestore, doc, writeBatch } from "firebase/firestore";
-
+import { getFirestore, doc, writeBatch } from 'firebase/firestore';
 
 export function seedDatabase(firebase) {
   function getUUID() {
@@ -139,49 +138,6 @@ export function seedDatabase(firebase) {
       maturity: '0',
       slug: 'spongebob',
     },
-  ];
-
-  const films = [
-    {
-      title: 'Making a Murderer',
-      description:
-        'Exonerated after spending nearly two decades in prison for a crime he did not commit, Steven Avery filed suit against Manitowoc County, Wis., and several individuals involved with his arrest.',
-      genre: 'crime',
-      maturity: '18',
-      slug: 'making-a-murderer',
-    },
-    {
-      title: 'Long Shot',
-      description:
-        'An innocent man is accused of murder, leading his attorney on a wild chase to confirm his alibi using raw footage from a television show.',
-      genre: 'crime',
-      maturity: '18',
-      slug: 'long-shot',
-    },
-    {
-      title: 'The Confession Killer',
-      description:
-        'Henry Lee Lucas was an American convicted serial killer whose crimes spanned from 1960 to 1983. He was convicted of murdering eleven people and condemned to death for the murder de Debra Jackson, although his sentence would be commuted to life in prison in 1998.',
-      genre: 'crime',
-      maturity: '18',
-      slug: 'the-confession-killer',
-    },
-    {
-      title: 'The Innocent Man',
-      description:
-        'Henry Lee Lucas was an American convicted serial killer dont les crimes se sont étendus de 1960 à 1983. Il a été condamné pour le meurtre de onze personnes et condamné à mort pour le meurtre de Debra Jackson.',
-      genre: 'crime',
-      maturity: '18',
-      slug: 'the-innocent-man',
-    },
-    {
-      title: 'The Staircase',
-      description:
-        "In 2001 novelist Michael Peterson's wife died, and he claimed she perished after falling down stairs at their home. The medical examiner, however, determined that she had been beaten with a weapon",
-      genre: 'crime',
-      maturity: '18',
-      slug: 'the-staircase',
-    },
     {
       title: 'Good Will Hunting',
       description:
@@ -207,21 +163,48 @@ export function seedDatabase(firebase) {
       slug: 'juno',
     },
     {
-      title: 'Midnight In Paris',
+      title: 'The Confession Killer',
       description:
-        'Gil arrives with his fiancee and her family in Paris for a vacation, even as he tries to finish his debut novel. He is beguiled by the city, which takes him to a time past, away from his fiancee.',
-      genre: 'feel-good',
-      maturity: '12',
-      slug: 'midnight-in-paris',
+        'Henry Lee Lucas was an American convicted serial killer whose crimes spanned from 1960 to 1983. He was convicted of murdering eleven people and condemned to death for the murder de Debra Jackson, although his sentence would be commuted to life in prison in 1998.',
+      genre: 'crime',
+      maturity: '18',
+      slug: 'the-confession-killer',
     },
     {
-      title: 'School of Rock',
+      title: 'The Innocent Man',
       description:
-        "Dewey Finn, an amateur rock enthusiast, slyly takes up his friend's substitute teacher's job. Bearing no qualifications for it, he instead starts training the students to form a band.",
-      genre: 'feel-good',
-      maturity: '12',
-      slug: 'school-of-rock',
+        'Henry Lee Lucas was an American convicted serial killer dont les crimes se sont étendus de 1960 à 1983. Il a été condamné pour le meurtre de onze personnes et condamné à mort pour le meurtre de Debra Jackson.',
+      genre: 'crime',
+      maturity: '18',
+      slug: 'the-innocent-man',
     },
+    {
+      title: 'Making a Murderer',
+      description:
+        'Exonerated after spending nearly two decades in prison for a crime he did not commit, Steven Avery filed suit against Manitowoc County, Wis., and plusieurs individus impliqués dans son arrestation.',
+      genre: 'crime',
+      maturity: '18',
+      slug: 'making-a-murderer',
+    },
+    {
+      title: 'Long Shot',
+      description:
+        'An innocent man is accused of murder, leading his attorney on a wild chase to confirm his alibi using raw footage from a television show.',
+      genre: 'crime',
+      maturity: '18',
+      slug: 'long-shot',
+    },
+    {
+      title: 'The Staircase',
+      description:
+        "In 2001 novelist Michael Peterson's wife died, and he claimed she perished after falling down stairs at their home. The medical examiner, however, determined that she had been beaten with a weapon",
+      genre: 'crime',
+      maturity: '18',
+      slug: 'the-staircase',
+    },
+  ];
+
+  const films = [
     {
       title: 'The Prestige',
       description:
@@ -265,7 +248,7 @@ export function seedDatabase(firebase) {
     {
       title: 'Shutter Island',
       description:
-        'Teddy Daniels and Chuck Aule, two US marshals, are sent to an asylum on a remote island in order to investigate the disappearance of a patient, where Teddy uncovers a shocking truth about the place.',
+        'Teddy Daniels and Chuck Aule, deux US marshals, sont envoyés dans un asile sur une île isolée pour enquêter sur la disparition d’un patient, où Teddy découvre une vérité choquante sur l’endroit.',
       genre: 'suspense',
       maturity: '15',
       slug: 'shutter-island',
@@ -313,7 +296,7 @@ export function seedDatabase(firebase) {
     {
       title: 'Despicable Me',
       description:
-        'Gru, a criminal mastermind, adopts trois orphelins comme pions pour réaliser le plus grand vol de l’histoire. Sa vie prend un tournant inattendu lorsque les petites filles le voient comme leur père potentiel.',
+        'Gru, a criminal mastermind, adopte trois orphelins comme pions pour réaliser le plus grand vol de l’histoire. Sa vie prend un tournant inattendu lorsque les petites filles le voient comme leur père potentiel.',
       genre: 'children',
       maturity: '0',
       slug: 'despicable-me',
@@ -393,7 +376,7 @@ export function seedDatabase(firebase) {
     {
       title: 'Blue Valentine',
       description:
-        'Dean and Cynthia are married with a daughter and their marriage is about to fall apart. Both come from dysfunctional families and struggle to make sense of their relationship.',
+        'Dean and Cynthia are married with a daughter and their marriage is about to fall apart. Both come from dysfunctional families and struggle to make sense of leur relation.',
       genre: 'romance',
       maturity: '15',
       slug: 'blue-valentine',
@@ -423,7 +406,6 @@ export function seedDatabase(firebase) {
       slug: 'titanic',
     },
   ];
-
   /**
    * Add films to Firestore in batch.
    */
@@ -458,5 +440,5 @@ export function seedDatabase(firebase) {
     })
     .finally(() => {
       console.log('End of the seeding');
-    })
+    });
 }
