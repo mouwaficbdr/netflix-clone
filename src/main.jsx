@@ -18,6 +18,7 @@ const config = {
 const firebase = initializeApp(config)
 const auth = getAuth(firebase)
 
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <FirebaseContext.Provider value={{ firebase, auth }}>
