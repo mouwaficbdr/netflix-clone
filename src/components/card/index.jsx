@@ -78,6 +78,7 @@ Card.Image = function CardImage({ ...restProps }) {
   return <Image {...restProps} />;
 };
 
+// eslint-disable-next-line no-unused-vars
 Card.Feature = function CardFeature({ children, category, ...restProps }) {
   const { showFeature, itemFeature, setShowFeature } =
     useContext(FeatureContext);
