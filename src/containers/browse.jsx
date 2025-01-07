@@ -1,53 +1,63 @@
 /* eslint-disable react/prop-types */
-import { useEffect, useState } from "react"
+import { useEffect, useState } from 'react';
 import Fuse from 'fuse.js';
-import { Card, Header, Loading, Player } from "../components"
-import * as ROUTES from "../constants/routes"
-import { SelectProfileContainer } from "./profiles"
-import { FooterContainer } from "./footer"
-import { signOut } from "firebase/auth"
+import { Card, Header, Loading, Player } from '../components';
+import * as ROUTES from '../constants/routes';
+import { SelectProfileContainer } from './profiles';
+import { FooterContainer } from './footer';
+import { getAuth, signOut } from 'firebase/auth'; // Importer auth et signOut
 
 export function BrowseContainer({ slides }) {
-  const [profile, setProfile] = useState({})
-  const [category, setCategory] = useState("series")
-  const [loading, setLoading] = useState(true)
-  const [searchTerm, setSearchTerm] = useState("")
-  const [slideRows, setSlideRows] = useState([])
+  const [profile, setProfile] = useState({});
+  const [category, setCategory] = useState('series');
+  const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [slideRows, setSlideRows] = useState([]);
 
   const user = {
-    displayName: "Karl",
-    photoURL: "1"
-  }
+    displayName: 'Karl',
+    photoURL: '1',
+  };
+
+  const auth = getAuth(); // Obtenir l'instance d'authentification
 
   useEffect(() => {
     setTimeout(() => {
-      setLoading(false)
-    }, 3000)
-  })
+      setLoading(false);
+    }, 3000);
+  }, []); // Ajout de dépendances (vide ici pour n'exécuter qu'une fois)
 
   useEffect(() => {
     const fuse = new Fuse(slideRows, {
       keys: [
         { name: 'data.title', weight: 0.7 },
         { name: 'data.description', weight: 0.2 },
-        { name: 'data.genre', weight: 0.1 }
+        { name: 'data.genre', weight: 0.1 },
       ],
       includeScore: true,
-      threshold: 0.3
-    })
-    const results = fuse.search(searchTerm).map(({ item }) => item)
+      threshold: 0.3,
+    });
+    const results = fuse.search(searchTerm).map(({ item }) => item);
 
     if (slideRows.length > 0 && searchTerm.length > 3 && results.length > 0) {
-      setSlideRows(results)
+      setSlideRows(results);
     } else {
-      setSlideRows(slides[category])
+      setSlideRows(slides[category]);
     }
-  }, [searchTerm, slideRows, category, slides])
+  }, [searchTerm, slideRows, category, slides]);
 
   useEffect(() => {
-    setSlideRows(slides[category])
-  }, [slides, category])
+    setSlideRows(slides[category]);
+  }, [slides, category]);
 
+  const handleSignOut = async () => {
+    try {
+      await signOut(auth); // Déconnexion de l'utilisateur
+      console.log('Déconnexion réussie');
+    } catch (error) {
+      console.error('Erreur lors de la déconnexion :', error.message);
+    }
+  };
 
   return profile.displayName ? (
     <>
@@ -86,7 +96,7 @@ export function BrowseContainer({ slides }) {
                   <Header.Link>{user.displayName}</Header.Link>
                 </Header.Group>
                 <Header.Group>
-                  <Header.Link onClick={() => signOut()}>Sign out</Header.Link>
+                  <Header.Link onClick={handleSignOut}>Sign out</Header.Link>
                 </Header.Group>
               </Header.Dropdown>
             </Header.Profile>
