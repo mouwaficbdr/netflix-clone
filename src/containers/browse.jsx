@@ -5,7 +5,7 @@ import { Card, Header, Loading, Player } from '../components';
 import * as ROUTES from '../constants/routes';
 import { SelectProfileContainer } from './profiles';
 import { FooterContainer } from './footer';
-import { getAuth, signOut } from 'firebase/auth'; // Importer auth et signOut
+import { getAuth, signOut, onAuthStateChanged } from 'firebase/auth'; // Importer auth et signOut
 
 export function BrowseContainer({ slides }) {
   const [profile, setProfile] = useState({});
@@ -13,13 +13,24 @@ export function BrowseContainer({ slides }) {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [slideRows, setSlideRows] = useState([]);
-
-  const user = {
-    displayName: 'Karl',
-    photoURL: '1',
-  };
+  const [user, setUser] = useState({ displayName: '', photoURL: '' });
 
   const auth = getAuth(); // Obtenir l'instance d'authentification
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser({
+          displayName: user.displayName || 'User',
+          photoURL: user.photoURL || '1',
+        });
+      } else {
+        setUser({ displayName: '', photoURL: '' });
+      }
+    });
+
+    return () => unsubscribe(); // Nettoyage de l'écouteur
+  }, [auth]);
 
   useEffect(() => {
     setTimeout(() => {
@@ -53,9 +64,9 @@ export function BrowseContainer({ slides }) {
   const handleSignOut = async () => {
     try {
       await signOut(auth); // Déconnexion de l'utilisateur
-      console.log('Déconnexion réussie');
+      console.log('Successful sign out');
     } catch (error) {
-      console.error('Erreur lors de la déconnexion :', error.message);
+      console.error('Error during sign out:', error.message);
     }
   };
 
