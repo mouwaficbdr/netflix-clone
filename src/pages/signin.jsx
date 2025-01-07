@@ -20,14 +20,13 @@ export default function Signin() {
     event.preventDefault();
     signInWithEmailAndPassword(auth, emailAddress, password)
       .then(() => {
-        setEmailAddress("")
-        setPassword("")
-        setError("")
-        navigate(ROUTES.BROWSE)
+        navigate(ROUTES.BROWSE);
       })
       .catch((error) => {
-        setError(error.message)
-      })
+        setError(error.message);
+        setEmailAddress('');
+        setPassword('');
+      });
   }
 
   return (
