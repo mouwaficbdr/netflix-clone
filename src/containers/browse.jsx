@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react"
 import Fuse from 'fuse.js';
-import { Card, Header, Loading } from "../components"
+import { Card, Header, Loading, Player } from "../components"
 import * as ROUTES from "../constants/routes"
 import { SelectProfileContainer } from "./profiles"
 import { FooterContainer } from "./footer"
@@ -124,7 +124,10 @@ export function BrowseContainer({ slides }) {
               ))}
             </Card.Entities>
             <Card.Feature category={category}>
-              
+              <Player>
+                <Player.Button />
+                <Player.Video />
+              </Player>
             </Card.Feature>
           </Card>
         ))}
