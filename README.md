@@ -22,7 +22,6 @@ The Netflix Clone project is a web application that mimics the user interface an
 - **Responsive Design**: Optimized for various screen sizes and devices.
 - **Movie Browsing**: Browse and search for movies and TV shows.
 - **Movie Details**: View detailed information about each movie or TV show.
-- **Watchlist**: Add movies and TV shows to your personal watchlist.
 - **Streaming Video Player**: Simulated video playback for a realistic experience.
 
 ## Technologies and Libraries
@@ -31,17 +30,16 @@ This project leverages the following technologies and libraries:
 - **HTML**: Markup language used for structuring the web pages.
 - **CSS**: Styling the visual presentation of the web pages.
 - **React**: A JavaScript library for building user interfaces.
-- **Redux**: A predictable state container for JavaScript apps.
 - **Firebase**: For user authentication and real-time database.
-- **Axios**: A promise-based HTTP client for making API requests.
 - **React Router**: For handling routing in React applications.
 
 ## Design Patterns
 The Netflix Clone project employs several design patterns to ensure a maintainable and scalable codebase:
 - **Component-Based Architecture**: Breaks down the UI into reusable components.
 - **Container-Presenter Pattern**: Separates the data-fetching logic from the UI rendering logic.
-- **Redux for State Management**: Centralizes the application's state and logic in a predictable way.
-- **Singleton Pattern**: Ensures a class has only one instance (e.g., configuring Axios instance).
+- **Styled-Components**: For styling the components in a more maintainable and scalable way.
+
+
 
 ## Installation
 Follow the steps below to set up and run the Netflix Clone project locally on your machine:
