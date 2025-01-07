@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react"
+import Fuse from 'fuse.js';
 import { Card, Header, Loading } from "../components"
 import * as ROUTES from "../constants/routes"
 import { SelectProfileContainer } from "./profiles"
@@ -23,6 +24,25 @@ export function BrowseContainer({ slides }) {
       setLoading(false)
     }, 3000)
   })
+
+  useEffect(() => {
+    const fuse = new Fuse(slideRows, {
+      keys: [
+        { name: 'data.title', weight: 0.7 },
+        { name: 'data.description', weight: 0.2 },
+        { name: 'data.genre', weight: 0.1 }
+      ],
+      includeScore: true,
+      threshold: 0.3
+    })
+    const results = fuse.search(searchTerm).map(({ item }) => item)
+
+    if (slideRows.length > 0 && searchTerm.length > 3 && results.length > 0) {
+      setSlideRows(results)
+    } else {
+      setSlideRows(slides[category])
+    }
+  }, [searchTerm, slideRows, category, slides])
 
   useEffect(() => {
     setSlideRows(slides[category])
