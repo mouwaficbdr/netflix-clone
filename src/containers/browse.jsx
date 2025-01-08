@@ -15,6 +15,8 @@ export function BrowseContainer({ slides }) {
   const [slideRows, setSlideRows] = useState([]);
   const [user, setUser] = useState({ displayName: '', photoURL: '' });
 
+  const BASE_URL = 'https://image.tmdb.org/t/p/w500'
+
   const auth = getAuth(); // Obtenir l'instance d'authentification
 
   useEffect(() => {
@@ -89,7 +91,7 @@ export function BrowseContainer({ slides }) {
             </Header.Link>
             <Header.Link
               active={category === 'films' ? 'true' : 'false'}
-              onClick={() => setCategory('films')}
+              onClick={() => setCategory('movies')}
             >
               Films
             </Header.Link>
@@ -133,13 +135,11 @@ export function BrowseContainer({ slides }) {
             <Card.Title>{slideItem.title}</Card.Title>
             <Card.Entities>
               {slideItem.data.map((item) => (
-                <Card.Item key={item.docId} item={item}>
-                  <Card.Image
-                    src={`/images/${category}/${item.genre}/${item.slug}/small.jpg`}
-                  />
+                <Card.Item key={item.id} item={item}>
+                  <Card.Image src={`${BASE_URL}${item.backdrop_path}`} />
                   <Card.Meta>
-                    <Card.SubTitle>{item.title}</Card.SubTitle>
-                    <Card.Text>{item.description}</Card.Text>
+                    <Card.SubTitle>{item.name}</Card.SubTitle>
+                    <Card.Text>{item.overview}</Card.Text>
                   </Card.Meta>
                 </Card.Item>
               ))}
