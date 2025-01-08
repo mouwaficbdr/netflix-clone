@@ -1,13 +1,31 @@
-import { BrowseContainer } from "../containers/browse";
-import { useContent } from "../hooks";
-import { selectionMap } from "../utils"
+// import { useEffect, useState } from 'react';
+import selectionMap from '../utils/selection-map';
+import { useGenres, useMovies, useSeries } from '../hooks';
+import { BrowseContainer } from '../containers/browse';
 
 export default function Browse() {
-  const { series } = useContent("series")
-  const { films } = useContent("films")
-  const slides = selectionMap({ series, films })
+  const { content: genresMovies, loading: loadingGenresMovies } =
+    useGenres('movie');
+  const { content: genresSeries, loading: loadingGenresSeries } =
+    useGenres('tv');
+  const { movies, loading: loadingMovies } = useMovies();
+  const { series, loading: loadingSeries } = useSeries();
 
-  console.log(slides.series);
+  const loading =
+    loadingGenresMovies ||
+    loadingGenresSeries ||
+    loadingMovies ||
+    loadingSeries;
 
-  return <BrowseContainer slides={slides} />
+  if (loading) {
+    return <div>Chargement...</div>; // Affiche un état de chargement global
+  }
+
+  const slides = selectionMap({
+    series,
+    movies,
+    genres: { movies: genresMovies, series: genresSeries },
+  });
+
+  return <BrowseContainer slides={slides} />;
 }
