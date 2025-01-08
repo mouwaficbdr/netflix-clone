@@ -7,6 +7,7 @@ Welcome to the **Netflix Clone** project! This repository contains a clone of th
 ---
 
 ## 📚 Table of Contents
+
 - [🎥 Introduction](#introduction)
 - [✨ Features](#features)
 - [🛠️ Technologies and Libraries](#technologies-and-libraries)
@@ -63,21 +64,25 @@ The **Netflix Clone** project employs several design patterns to ensure a mainta
 Follow the steps below to set up and run the **Netflix Clone** project locally on your machine:
 
 1. **Clone the repository**:
+
 ```bash
 💻 git clone https://github.com/mouwaficbdr/netflix-clone.git
 ```
 
 2. **Navigate to the project directory**:
+
 ```bash
 📂 cd netflix-clone
 ```
 
 3. **Install dependencies**:
+
 ```bash
 📦 npm install
 ```
 
 4. **Start the development server**:
+
 ```bash
 🚀 npm start
 ```
@@ -129,11 +134,13 @@ I welcome contributions to the **Netflix Clone** project! If you have any ideas 
 Click the "Fork" button at the top-right corner of this page to create a copy of the repository under your GitHub account.
 
 2. **Clone your forked repository**:
+
 ```bash
 💻 git clone https://github.com/your-username/netflix-clone.git
 ```
 
 3. **Create a new branch**:
+
 ```bash
 🌱 git checkout -b feature/your-feature-name
 ```
@@ -142,6 +149,7 @@ Click the "Fork" button at the top-right corner of this page to create a copy of
 💡 Implement your feature or fix and commit your changes.
 
 5. **Push your changes**:
+
 ```bash
 📤 git push origin feature/your-feature-name
 ```
@@ -158,4 +166,3 @@ This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) f
 ---
 
 Thank you for using the **Netflix Clone** project! If you have any questions or need further assistance, feel free to reach out. 💬
-
