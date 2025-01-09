@@ -10,7 +10,7 @@ export default function useSeries() {
       try {
         setLoading(true);
         const data = await fetchSeries();
-        setSeries(data.results);
+        setSeries(data);
         console.log('Les séries récupérés: ', data);
       } catch (error) {
         console.error('Erreur lors de la récupération des séries :', error);
