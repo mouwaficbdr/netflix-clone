@@ -9,7 +9,7 @@ import { getAuth, signOut, onAuthStateChanged } from 'firebase/auth'; // Importe
 
 export function BrowseContainer({ slides }) {
   const [profile, setProfile] = useState({});
-  const [category, setCategory] = useState('series');
+  const [category, setCategory] = useState('movies');
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [slideRows, setSlideRows] = useState([]);
