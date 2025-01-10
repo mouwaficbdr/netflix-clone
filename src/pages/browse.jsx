@@ -1,7 +1,8 @@
 // import { useEffect, useState } from 'react';
 import selectionMap from '../utils/selection-map';
 import { useGenres, useMovies, useSeries } from '../hooks';
-import { BrowseContainer } from '../containers/browse';
+import BrowseContainer from '../containers/browse';
+import { Loading } from "../components"
 
 export default function Browse() {
   const { content: genresMovies, loading: loadingGenresMovies } =
@@ -18,7 +19,7 @@ export default function Browse() {
     loadingSeries;
 
   if (loading) {
-    return <div>Chargement...</div>; // Affiche un état de chargement global
+    return <Loading></Loading>; // Affiche un état de chargement global
   }
 
   const slides = selectionMap({
@@ -27,5 +28,5 @@ export default function Browse() {
     genres: { movies: genresMovies, series: genresSeries },
   });
 
-  return <BrowseContainer slides={slides} />;
+  return <BrowseContainer slides={slides} loadingMovies={loadingMovies} loadingSeries={loadingSeries} />;
 }
