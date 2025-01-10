@@ -4,7 +4,7 @@ const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 // Base URL de TMDB
 const BASE_URL = 'https://api.themoviedb.org/3';
 
-export async function fetchSeries(totalPages = 10) {
+export async function fetchSeries(totalPages = 6) {
 
   const allResults = [];
   
@@ -68,7 +68,7 @@ export async function fetchBannerInfos(type = 'movies') {
 }
 
 
-export async function fetchMovies(totalPages = 10) {
+export async function fetchMovies(totalPages = 6) {
 
   const allResults = [];
   
