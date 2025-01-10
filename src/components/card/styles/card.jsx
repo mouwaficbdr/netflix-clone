@@ -7,7 +7,7 @@ export const Title = styled.h2`
 
 export const Container = styled.div`
   display: flex;
-  margin-bottom: 70px;
+  margin-bottom: 50px;
   box-sizing: border-box;
   flex-direction: column;
   > ${Title} {
@@ -28,7 +28,6 @@ export const Container = styled.div`
     margin-bottom: 0;
   }
   overflow-x: auto;
-  /* overflow-y: clip; */
   scroll-behavior: smooth;
 
   /* Cacher le scrollbar */
@@ -53,7 +52,7 @@ export const Group = styled.div`
 
   > ${Container}:first-of-type {
     @media (min-width: 1100px) {
-      margin-top: -150px;
+      margin-top: -200px;
     }
   }
 `;
@@ -85,7 +84,65 @@ export const Entities = styled.div`
   width: auto;
   min-width: fit-content;
   overflow-x: auto;
+  position: relative;
 `;
+
+
+export const NavigateLeft = styled.button`
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100px;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+
+  >img{
+    height: 50px;
+    width: 80px;
+  }
+
+`
+
+export const NavigateRight = styled.button`
+  position: absolute;
+`
+
+
+
+// export const Navigate = styled.div`
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   height: 100%;
+//   width: 100vw;
+//   z-index: 10;
+//   display: flex;
+//   justify-content: space-between;
+
+//   > button {
+//     background-color: transparent; 
+//     border: none; 
+//     color: white; 
+//     cursor: pointer; 
+//     width: 100px;
+//     height: 100%;
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+
+//     >img{
+//       height: 50px;
+//       width: 80px;
+//     }
+//   }
+// `;
 
 export const Meta = styled.div`
   display: none;
@@ -121,10 +178,8 @@ export const Item = styled.div`
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  transform-origin: center center;
-  transform: translateZ(30px) scale(1.05); /* Rapprochement (translateZ) et léger zoom (scale) */
-  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2); /* Ombre pour renforcer l'effet de profondeur */ /* Assure que le zoom et la translation se font depuis le centre de la carte */
+  transition: transform 0.3s ease;
+
   @media (max-width: 500px) {
     width: 100px;
     height: 170px;
@@ -136,20 +191,23 @@ export const Item = styled.div`
   }
 
   /* HOVER EFFECT */
-
   &:hover {
-    transform: scale(1.05) translateY(-10px); /* Augmentation de la taille et léger décalage vertical */
-    z-index: 10; /* Élever la carte par rapport aux autres éléments */
-    width: 260px; /* Augmenter légèrement la largeur */
-    height: 370px; /* Augmenter légèrement la hauteur */
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3); /* Ombre plus marquée pour l'effet de profondeur */
-    @media (max-width: 500px) {
-      width: 120px; /* Ajustement de la largeur pour les petits écrans */
-      height: 200px; /* Ajustement de la hauteur pour les petits écrans */
+    transform: scale(1.05);
+    animation: rebound 0.6s ease-out;
+  }
+
+  @keyframes rebound {
+    0% {
+      transform: scale(1.05);
     }
-    @media (max-width: 370px) {
-      width: 60px; /* Ajustement de la largeur pour les très petits écrans */
-      height: 90px; /* Ajustement de la hauteur pour les très petits écrans */
+    30% {
+      transform: scale(1.1);
+    }
+    50% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(1.05);
     }
   }
 `;
