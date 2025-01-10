@@ -1,28 +1,46 @@
 import styled from 'styled-components';
 
-export const Title = styled.p`
-  font-size: 24px;
+export const Title = styled.h2`
   color: #e5e5e5;
-  font-weight: bold;
   margin-left: 56px;
-  margin-right: 56px;
-  margin-top: 0;
 `;
 
 export const Container = styled.div`
   display: flex;
-  flex-direction: column;
-  margin-bottom: 50px;
+  margin-bottom: 70px;
   box-sizing: border-box;
-
+  flex-direction: column;
   > ${Title} {
     @media (max-width: 1000px) {
       margin-left: 30px;
     }
   }
 
+  @media (max-width: 370px) {
+    margin-bottom: 10px;
+  }
+
+  @media (max-width: 500px) {
+    margin-bottom: 10px;
+  }
+
   &:last-of-type {
     margin-bottom: 0;
+  }
+  overflow-x: auto;
+  /* overflow-y: clip; */
+  scroll-behavior: smooth;
+
+  /* Cacher le scrollbar */
+  /* Pour Firefox */
+  scrollbar-width: none;
+
+  /* Pour Internet Explorer et Edge */
+  -ms-overflow-style: none;
+
+  /* Pour Chrome, Safari et Edge */
+  &::-webkit-scrollbar {
+    display: none;
   }
 `;
 
@@ -63,6 +81,10 @@ export const Text = styled.p`
 export const Entities = styled.div`
   display: flex;
   flex-direction: row;
+  flex-wrap: nowrap;
+  width: auto;
+  min-width: fit-content;
+  overflow-x: auto;
 `;
 
 export const Meta = styled.div`
@@ -76,49 +98,45 @@ export const Meta = styled.div`
 export const Image = styled.img`
   border: 0;
   width: 100%;
+  height: 100%;
   max-width: 305px;
   cursor: pointer;
-  height: auto;
   padding: 0;
   margin: 0;
+  object-fit: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
 `;
 
 export const Item = styled.div`
-  display: flex;
-  flex-direction: column;
   margin-right: 5px;
-  position: relative;
   cursor: pointer;
-  transition: transform 0.2;
+  border-radius: 10px;
+  width: 212px;
+  height: 314px;
+  position: relative;
+  background: url(${({ backgroundImage }) => backgroundImage});
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 
-  &:hover {
-    transform: scale(1.3);
-    z-index: 99;
+  @media (max-width: 500px) {
+    width: 100px;
+    height: 170px;
   }
 
-  @media (min-width: 1000px) {
-    &:hover ${Meta}, &:hover ${Text}, &:hover ${SubTitle} {
-      display: block;
-      z-index: 100;
-    }
+  @media (max-width: 370px) {
+    width: 50px;
+    height: 70px;
   }
 
-  &:first-of-type {
-    margin-left: 56px;
+  /* HOVER EFFECT */
 
-    @media (max-width: 1000px) {
-      margin-left: 30px;
-    }
-  }
-
-  &:last-of-type {
-    margin-right: 56px;
-
-    @media (max-width: 1000px) {
-      margin-right: 30px;
-    }
-  }
 `;
+
+/* FEATURE */
 
 export const FeatureText = styled.p`
   font-size: 18px;
