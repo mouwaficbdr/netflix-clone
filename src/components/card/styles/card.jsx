@@ -111,7 +111,7 @@ export const Image = styled.img`
 `;
 
 export const Item = styled.div`
-  margin-right: 5px;
+  margin: 10px;
   cursor: pointer;
   border-radius: 10px;
   width: 212px;
@@ -121,7 +121,10 @@ export const Item = styled.div`
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transform-origin: center center;
+  transform: translateZ(30px) scale(1.05); /* Rapprochement (translateZ) et léger zoom (scale) */
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2); /* Ombre pour renforcer l'effet de profondeur */ /* Assure que le zoom et la translation se font depuis le centre de la carte */
   @media (max-width: 500px) {
     width: 100px;
     height: 170px;
@@ -134,6 +137,21 @@ export const Item = styled.div`
 
   /* HOVER EFFECT */
 
+  &:hover {
+    transform: scale(1.05) translateY(-10px); /* Augmentation de la taille et léger décalage vertical */
+    z-index: 10; /* Élever la carte par rapport aux autres éléments */
+    width: 260px; /* Augmenter légèrement la largeur */
+    height: 370px; /* Augmenter légèrement la hauteur */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3); /* Ombre plus marquée pour l'effet de profondeur */
+    @media (max-width: 500px) {
+      width: 120px; /* Ajustement de la largeur pour les petits écrans */
+      height: 200px; /* Ajustement de la hauteur pour les petits écrans */
+    }
+    @media (max-width: 370px) {
+      width: 60px; /* Ajustement de la largeur pour les très petits écrans */
+      height: 90px; /* Ajustement de la hauteur pour les très petits écrans */
+    }
+  }
 `;
 
 /* FEATURE */
