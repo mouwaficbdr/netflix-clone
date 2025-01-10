@@ -6,6 +6,7 @@ import * as ROUTES from '../constants/routes';
 import { SelectProfileContainer } from './profiles';
 import { FooterContainer } from './footer';
 import { getAuth, signOut, onAuthStateChanged } from 'firebase/auth'; // Importer auth et signOut
+import { fetchBannerInfos } from '../utils/fetchTmdb';
 
 export function BrowseContainer({ slides }) {
   const [profile, setProfile] = useState({});
@@ -14,10 +15,37 @@ export function BrowseContainer({ slides }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [slideRows, setSlideRows] = useState([]);
   const [user, setUser] = useState({ displayName: '', photoURL: '' });
+  const [bannerInfos, setBannerInfos] = useState({});
 
-  const BASE_URL = 'https://image.tmdb.org/t/p/w500'
+  console.log("Banner info from browse: " ,bannerInfos)
+
+  const BASE_URL = 'https://image.tmdb.org/t/p/w780';
+
+
+  const defaultBannerDescription =
+    'Forever alone in a crowd, failed comedian Arthur Fleck seeks ' +
+    'connection as he walks the streets of Gotham City. Arthur wears two ' +
+    'masks -- the one he paints for his day job as a clown, and the guise ' +
+    'he projects in a futile attempt to feel like he is part of the world ' +
+    'around him.';
+  const defaultBannerImage = "joker1"
 
   const auth = getAuth(); // Obtenir l'instance d'authentification
+
+  useEffect(() => {
+    async function fetchBanner() {
+      try {
+        const data = await fetchBannerInfos(category);
+        setBannerInfos(data);
+      } catch (error) {
+        console.error(
+          'Erreur lors de la récupération des infos de la banière:',
+          error
+        );
+      }
+    }
+    fetchBanner();
+  }, [category])
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -73,9 +101,16 @@ export function BrowseContainer({ slides }) {
   };
 
   return profile.displayName ? (
-    <>
+    <div style={{ backgroundColor: '#151515' }}>
       {loading ? <Loading src={user.photoURL} /> : <Loading.ReleaseBody />}
-      <Header src="joker1" dontShowOnSmallViewPort>
+      <Header
+        src={
+          bannerInfos.backdrop_path
+            ? `https://image.tmdb.org/t/p/original/${bannerInfos.backdrop_path}`
+            : defaultBannerImage
+        }
+        dontShowOnSmallViewPort
+      >
         <Header.Frame>
           <Header.Group>
             <Header.Logo
@@ -117,13 +152,13 @@ export function BrowseContainer({ slides }) {
         </Header.Frame>
 
         <Header.Feature>
-          <Header.FeatureCallOut>Watch Joker Now</Header.FeatureCallOut>
+          <Header.FeatureCallOut>
+            {bannerInfos.title ? bannerInfos.title  : (bannerInfos.name ? bannerInfos.name : 'Joker')}
+          </Header.FeatureCallOut>
           <Header.Text>
-            Forever alone in a crowd, failed comedian Arthur Fleck seeks
-            connection as he walks the streets of Gotham City. Arthur wears two
-            masks -- the one he paints for his day job as a clown, and the guise
-            he projects in a futile attempt to feel like he is part of the world
-            around him.
+            {bannerInfos.overview
+              ? bannerInfos.overview
+              : defaultBannerDescription}
           </Header.Text>
           <Header.PlayButton>Play</Header.PlayButton>
         </Header.Feature>
@@ -135,12 +170,11 @@ export function BrowseContainer({ slides }) {
             <Card.Title>{slideItem.title}</Card.Title>
             <Card.Entities>
               {slideItem.data.map((item) => (
-                <Card.Item key={item.id} item={item}>
-                  <Card.Image src={`${BASE_URL}${item.backdrop_path}`} />
-                  <Card.Meta>
-                    <Card.SubTitle>{item.name}</Card.SubTitle>
-                    <Card.Text>{item.overview}</Card.Text>
-                  </Card.Meta>
+                <Card.Item
+                  key={item.id}
+                  item={item}
+                  backgroundImage={`${BASE_URL}${item.backdrop_path}`}
+                >
                 </Card.Item>
               ))}
             </Card.Entities>
@@ -155,7 +189,7 @@ export function BrowseContainer({ slides }) {
       </Card.Group>
 
       <FooterContainer />
-    </>
+    </div>
   ) : (
     <SelectProfileContainer user={user} setProfile={setProfile} />
   );
