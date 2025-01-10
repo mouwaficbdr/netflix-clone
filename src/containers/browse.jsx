@@ -106,7 +106,7 @@ export function BrowseContainer({ slides }) {
       <Header
         src={
           bannerInfos.backdrop_path
-            ? `https://image.tmdb.org/t/p/original/${bannerInfos.backdrop_path}`
+            ? `${BASE_URL}/${bannerInfos.backdrop_path}`
             : defaultBannerImage
         }
         dontShowOnSmallViewPort
@@ -153,7 +153,11 @@ export function BrowseContainer({ slides }) {
 
         <Header.Feature>
           <Header.FeatureCallOut>
-            {bannerInfos.title ? bannerInfos.title  : (bannerInfos.name ? bannerInfos.name : 'Joker')}
+            {bannerInfos.title
+              ? bannerInfos.title
+              : bannerInfos.name
+              ? bannerInfos.name
+              : 'Joker'}
           </Header.FeatureCallOut>
           <Header.Text>
             {bannerInfos.overview
@@ -173,9 +177,8 @@ export function BrowseContainer({ slides }) {
                 <Card.Item
                   key={item.id}
                   item={item}
-                  backgroundImage={`${BASE_URL}${item.backdrop_path}`}
-                >
-                </Card.Item>
+                  backgroundImage={`${BASE_URL}${item.poster_path}`}
+                ></Card.Item>
               ))}
             </Card.Entities>
             <Card.Feature category={category}>
