@@ -8,16 +8,21 @@ import { FooterContainer } from './footer';
 import { getAuth, signOut, onAuthStateChanged } from 'firebase/auth'; // Importer auth et signOut
 import { fetchBannerInfos } from '../utils/fetchTmdb';
 
-export function BrowseContainer({ slides }) {
+export default function BrowseContainer({ slides, loadingSeries, loadingMovies }) {
   const [profile, setProfile] = useState({});
   const [category, setCategory] = useState('movies');
   const [loading, setLoading] = useState(true);
+  // eslint-disable-next-line no-unused-vars
+  const [areMoviesLoading, setAreMoviesLoading] = useState(loadingMovies) 
+  // eslint-disable-next-line no-unused-vars
+  const [areSeriesLoading, setAreSeriesLoading] = useState(loadingSeries) 
   const [searchTerm, setSearchTerm] = useState('');
   const [slideRows, setSlideRows] = useState([]);
   const [user, setUser] = useState({ displayName: '', photoURL: '' });
   const [bannerInfos, setBannerInfos] = useState({});
 
-  console.log("Banner info from browse: " ,bannerInfos)
+
+  const areCurrentlyLoading = category === "series" ? areSeriesLoading : areMoviesLoading
 
   const BASE_URL = 'https://image.tmdb.org/t/p/w780';
 
@@ -100,13 +105,24 @@ export function BrowseContainer({ slides }) {
     }
   };
 
+
+  function shouldDisplay(movies, minCount = 5) {
+    return Array.isArray(movies) && movies.length >= minCount;
+  }
+
   return profile.displayName ? (
     <div style={{ backgroundColor: '#151515' }}>
-      {loading ? <Loading src={user.photoURL} /> : <Loading.ReleaseBody />}
+      {loading ? (
+        <Loading>
+          <Loading.Picture src={`${user.photoURL}`} />
+        </Loading>
+      ) : (
+        <Loading.ReleaseBody />
+      )}
       <Header
         src={
           bannerInfos.backdrop_path
-            ? `${BASE_URL}/${bannerInfos.backdrop_path}`
+            ? `https://image.tmdb.org/t/p/original/${bannerInfos.backdrop_path}`
             : defaultBannerImage
         }
         dontShowOnSmallViewPort
@@ -169,26 +185,32 @@ export function BrowseContainer({ slides }) {
       </Header>
 
       <Card.Group>
-        {slideRows.map((slideItem) => (
-          <Card key={`${category}-${slideItem.title.toLowerCase()}`}>
-            <Card.Title>{slideItem.title}</Card.Title>
-            <Card.Entities>
-              {slideItem.data.map((item) => (
-                <Card.Item
-                  key={item.id}
-                  item={item}
-                  backgroundImage={`${BASE_URL}${item.poster_path}`}
-                ></Card.Item>
-              ))}
-            </Card.Entities>
-            <Card.Feature category={category}>
-              <Player>
-                <Player.Button />
-                <Player.Video />
-              </Player>
-            </Card.Feature>
-          </Card>
-        ))}
+        {slideRows.map((slideItem) =>
+          areCurrentlyLoading ? (
+            <Loading key={slideItem.id}></Loading>
+          ) : ( shouldDisplay(slideItem.data) ? 
+            <Card key={`${category}-${slideItem.title.toLowerCase()}`}>
+              <Card.Title>{slideItem.title}</Card.Title>
+                <Card.Entities>
+                  {slideItem.data.map((item) => (
+                    <Card.Item
+                      key={item.id}
+                      item={item}
+                      backgroundImage={`${BASE_URL}${item.poster_path}`}
+                    ></Card.Item>
+                  ))}
+                </Card.Entities>
+              <Card.Feature category={category}>
+                <Player>
+                  <Player.Button />
+                  <Player.Video />
+                </Player>
+              </Card.Feature>
+            </Card>
+              :
+            null  
+          )
+        )}
       </Card.Group>
 
       <FooterContainer />
