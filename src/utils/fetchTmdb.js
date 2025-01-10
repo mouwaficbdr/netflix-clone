@@ -32,6 +32,42 @@ export async function fetchSeries(totalPages = 10) {
   }
 }
 
+export async function fetchBannerInfos(type = 'movies') {
+  // Validation des arguments et définition locale du type
+  const mediaType = type === 'series' ? 'tv' : 'movie';
+
+  try {
+    const response = await fetch(
+      `${BASE_URL}/${mediaType}/popular?api_key=${API_KEY}&language=fr-FR&page=1`
+    );
+
+    if (!['movies', 'series'].includes(type)) {
+      throw new Error(`Type invalide: ${type}`);
+    }
+
+    // Vérification de la réponse
+    if (!response.ok) {
+      throw new Error(
+        `Erreur HTTP: ${response.status} - ${response.statusText}`
+      );
+    }
+
+    // Récupération et transformation des données
+    const data = await response.json();
+
+    // Vérifier si les résultats existent
+    if (!data.results || data.results.length === 0) {
+      throw new Error('Aucun résultat trouvé dans les données retournées.');
+    }
+    console.log("Banner info from fetch: ",data.results[0]);
+    return data.results[0];
+  } catch (error) {
+    console.error('Erreur dans fetchBannerInfos:', error.message);
+    return null; // Retourne une valeur par défaut explicite
+  }
+}
+
+
 export async function fetchMovies(totalPages = 10) {
 
   const allResults = [];
