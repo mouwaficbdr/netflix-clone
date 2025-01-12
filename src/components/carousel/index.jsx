@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useRef } from 'react';
-import './styles/Carousel.css'; // Ajoute les styles CSS externes
+import './styles/carousel'; // Ajoute les styles CSS externes
 
 export default function Carousel({
   items,
