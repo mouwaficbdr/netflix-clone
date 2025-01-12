@@ -1,11 +1,11 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from 'react';
 import Fuse from 'fuse.js';
-import { Card, Header, Loading, Player } from '../components';
+import { Card, Header, Loading, Player, Carousel } from '../components';
 import * as ROUTES from '../constants/routes';
 import { SelectProfileContainer } from './profiles';
 import { FooterContainer } from './footer';
-import { getAuth, signOut, onAuthStateChanged } from 'firebase/auth'; // Importer auth et signOut
+import { getAuth, signOut, onAuthStateChanged } from 'firebase/auth';
 import { fetchBannerInfos } from '../utils/fetchTmdb';
 
 export default function BrowseContainer({ slides, loadingSeries, loadingMovies }) {
@@ -20,13 +20,14 @@ export default function BrowseContainer({ slides, loadingSeries, loadingMovies }
   const [slideRows, setSlideRows] = useState([]);
   const [user, setUser] = useState({ displayName: '', photoURL: '' });
   const [bannerInfos, setBannerInfos] = useState({});
+  
 
-
+  /* VARIABLES LOCALES */
   const areCurrentlyLoading = category === "series" ? areSeriesLoading : areMoviesLoading
-
   const BASE_URL = 'https://image.tmdb.org/t/p/w780';
+  
 
-
+  /* Infos de base en cas de problème de chargement */
   const defaultBannerDescription =
     'Forever alone in a crowd, failed comedian Arthur Fleck seeks ' +
     'connection as he walks the streets of Gotham City. Arthur wears two ' +
@@ -36,6 +37,8 @@ export default function BrowseContainer({ slides, loadingSeries, loadingMovies }
   const defaultBannerImage = "joker1"
 
   const auth = getAuth(); // Obtenir l'instance d'authentification
+
+  /* UseEffects */
 
   useEffect(() => {
     async function fetchBanner() {
@@ -71,7 +74,7 @@ export default function BrowseContainer({ slides, loadingSeries, loadingMovies }
     setTimeout(() => {
       setLoading(false);
     }, 3000);
-  }, []); // Ajout de dépendances (vide ici pour n'exécuter qu'une fois)
+  }, []); 
 
   useEffect(() => {
     const fuse = new Fuse(slideRows, {
@@ -96,6 +99,8 @@ export default function BrowseContainer({ slides, loadingSeries, loadingMovies }
     setSlideRows(slides[category]);
   }, [slides, category]);
 
+  /* FONCTIONS UTILITAIRES */
+
   const handleSignOut = async () => {
     try {
       await signOut(auth); // Déconnexion de l'utilisateur
@@ -105,10 +110,11 @@ export default function BrowseContainer({ slides, loadingSeries, loadingMovies }
     }
   };
 
-
   function shouldDisplay(movies, minCount = 5) {
     return Array.isArray(movies) && movies.length >= minCount;
   }
+
+  /* FIN DES FONCTIONS UTILITAIRES */
 
   return profile.displayName ? (
     <div style={{ backgroundColor: '#151515' }}>
@@ -135,13 +141,13 @@ export default function BrowseContainer({ slides, loadingSeries, loadingMovies }
               alt="Netflix"
             />
             <Header.Link
-              active={category === 'series' ? 'true' : 'false'}
+              active={category === 'series'}
               onClick={() => setCategory('series')}
             >
               Series
             </Header.Link>
             <Header.Link
-              active={category === 'films' ? 'true' : 'false'}
+              active={category === 'movies'}
               onClick={() => setCategory('movies')}
             >
               Films
@@ -185,21 +191,25 @@ export default function BrowseContainer({ slides, loadingSeries, loadingMovies }
       </Header>
 
       <Card.Group>
-        {slideRows.map((slideItem) =>
-          areCurrentlyLoading ? (
+        {slideRows.map((slideItem) => {
+          
+          return areCurrentlyLoading ? (
             <Loading key={slideItem.id}></Loading>
-          ) : ( shouldDisplay(slideItem.data) ? 
+          ) : shouldDisplay(slideItem.data) ? (
             <Card key={`${category}-${slideItem.title.toLowerCase()}`}>
               <Card.Title>{slideItem.title}</Card.Title>
-                <Card.Entities>
-                  {slideItem.data.map((item) => (
-                    <Card.Item
-                      key={item.id}
-                      item={item}
-                      backgroundImage={`${BASE_URL}${item.poster_path}`}
-                    ></Card.Item>
-                  ))}
-                </Card.Entities>
+              <Carousel
+                items={slideItem.data} // Liste des films ou séries
+                renderCard={(item) => (
+                  <Card.Item
+                    key={item.id}
+                    item={item}
+                    backgroundImage={`${BASE_URL}${item.poster_path}`}
+                  />
+                )}
+                containerClass="custom-slider-class" // Optionnel : classe CSS supplémentaire
+                itemClass="custom-item-class" // Optionnel : classe CSS supplémentaire
+              />
               <Card.Feature category={category}>
                 <Player>
                   <Player.Button />
@@ -207,10 +217,8 @@ export default function BrowseContainer({ slides, loadingSeries, loadingMovies }
                 </Player>
               </Card.Feature>
             </Card>
-              :
-            null  
-          )
-        )}
+          ) : null;
+        })}
       </Card.Group>
 
       <FooterContainer />
