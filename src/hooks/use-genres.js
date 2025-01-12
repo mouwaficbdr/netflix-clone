@@ -13,8 +13,7 @@ export default function useGenres(type) {
         // Appel à la fonction pour récupérer les genres
         const genres = await fetchGenres(type);
 
-        // Tu peux maintenant organiser ou traiter les données comme nécessaire
-        console.log(`Genres de type ${type} récupérés :`, genres);
+        // console.log(`Genres de type ${type} récupérés :`, genres);
         setContent(genres); // Pour l'instant, on stocke juste les genres
       } catch (error) {
         console.error(`Erreur lors de la récupération du contenu de type ${type}:`, error);
