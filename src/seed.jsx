@@ -425,10 +425,10 @@ export function seedDatabase(firebase) {
   /**
    * Commit all batched writes to Firestore.
    */
-  console.log(`Added ${series.length} series to the batch.`);
-  console.log(`Added ${films.length} films to the batch.`);
+  // console.log(`Added ${series.length} series to the batch.`);
+  // console.log(`Added ${films.length} films to the batch.`);
 
-  console.log('THE SEEDING BEGINS NOW !!!');
+  // console.log('THE SEEDING BEGINS NOW !!!');
 
   batch
     .commit()
