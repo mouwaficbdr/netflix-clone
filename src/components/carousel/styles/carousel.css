@@ -1,0 +1,84 @@
+.carousel {
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  margin: 20px 0;
+  
+}
+
+/* Boutons de navigation */
+.carousel-button {
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.6);
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 10;
+  border-radius: 50%;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.carousel-button > img {
+  width: 50%;
+}
+
+@media (max-width: 768px) {
+  .carousel-button {
+    display: none;
+  }
+}
+
+.carousel-button.left {
+  left: 10px;
+}
+
+.carousel-button.right {
+  right: 10px;
+}
+
+.carousel-button:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+/* Conteneur des items */
+.carousel-container {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 10px;
+  /* display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: auto;
+  min-height: fit-content;
+  min-width: fit-content;
+  margin-bottom: 12px; */
+  position: relative;
+  height: auto;
+
+  /* Cacher le scrollbar */
+  /* Pour Firefox */
+  scrollbar-width: none;
+
+  /* Pour Internet Explorer et Edge */
+  -ms-overflow-style: none;
+
+  /* Pour Chrome, Safari et Edge */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Chaque item */
+.carousel-item {
+  scroll-snap-align: start;
+}
