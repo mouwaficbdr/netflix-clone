@@ -35,10 +35,10 @@ export const Container = styled.div`
 `;
 
 export const Link = styled.p`
-  color: #fff;
   text-decoration: none;
   margin-right: 30px;
   font-weight: ${({ active }) => (active ? '700' : 'normal')};
+  color: ${({ active }) => (active ? '#e50914' : '#fff')};
   cursor: pointer;
 
   &:hover {
