@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import{ useState, useContext, createContext } from 'react';
+import { useState, useContext, createContext } from 'react';
 
 import {
   Container,
@@ -17,8 +17,6 @@ import {
   Entities,
   Item,
   Image,
-  NavigateRight,
-  NavigateLeft
 } from './styles/card';
 
 const FeatureContext = createContext();
@@ -40,20 +38,6 @@ Card.Group = function CardGroup({ children, ...restProps }) {
   return <Group {...restProps}>{children}</Group>;
 };
 
-// Card.Navigate = function CardNavigate({...restProps }) {
-//   return (
-//     <Navigate {...restProps}>
-//       <button>
-//         <img src="/images/icons/chevron-rigth.png" alt="Chevron left" />
-//       </button>
-//       <button>
-//         <img src="/images/icons/chevron-rigth.png" alt="Chevron rigth" />
-//       </button>
-//     </Navigate>
-//   );
-// };
-
-
 
 Card.Title = function CardTitle({ children, ...restProps }) {
   return <Title {...restProps}>{children}</Title>;
@@ -68,14 +52,7 @@ Card.Text = function CardText({ children, ...restProps }) {
 };
 
 Card.Entities = function CardEntities({ children, ...restProps }) {
-  return (
-    <Entities {...restProps}>
-      <NavigateLeft/>
-      <NavigateRight/>
-      {children}
-    </Entities>
-
-  )
+  return <Entities {...restProps}>{children}</Entities>;
 };
 
 Card.Meta = function CardMeta({ children, ...restProps }) {
