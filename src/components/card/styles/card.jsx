@@ -7,7 +7,7 @@ export const Title = styled.h2`
 
 export const Container = styled.div`
   display: flex;
-  margin-bottom: 50px;
+  margin-bottom: 46px;
   box-sizing: border-box;
   flex-direction: column;
   > ${Title} {
@@ -77,72 +77,32 @@ export const Text = styled.p`
   line-height: normal;
 `;
 
+
 export const Entities = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   width: auto;
+  min-height: fit-content;
   min-width: fit-content;
-  overflow-x: auto;
+  margin-bottom: 12px;
   position: relative;
+  height: auto;
+
+  /* Cacher le scrollbar */
+  /* Pour Firefox */
+  scrollbar-width: none;
+
+  /* Pour Internet Explorer et Edge */
+  -ms-overflow-style: none;
+
+  /* Pour Chrome, Safari et Edge */
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 
-export const NavigateLeft = styled.button`
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100px;
-  z-index: 10;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: transparent;
-  border: none;
-  color: white;
-  cursor: pointer;
-
-  >img{
-    height: 50px;
-    width: 80px;
-  }
-
-`
-
-export const NavigateRight = styled.button`
-  position: absolute;
-`
-
-
-
-// export const Navigate = styled.div`
-//   position: absolute;
-//   top: 0;
-//   left: 0;
-//   height: 100%;
-//   width: 100vw;
-//   z-index: 10;
-//   display: flex;
-//   justify-content: space-between;
-
-//   > button {
-//     background-color: transparent; 
-//     border: none; 
-//     color: white; 
-//     cursor: pointer; 
-//     width: 100px;
-//     height: 100%;
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-
-//     >img{
-//       height: 50px;
-//       width: 80px;
-//     }
-//   }
-// `;
 
 export const Meta = styled.div`
   display: none;
@@ -168,7 +128,7 @@ export const Image = styled.img`
 `;
 
 export const Item = styled.div`
-  margin: 10px;
+  margin-right: 10px;
   cursor: pointer;
   border-radius: 10px;
   width: 212px;
