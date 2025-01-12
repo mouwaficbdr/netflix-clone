@@ -24,7 +24,7 @@ export async function fetchSeries(totalPages = 6) {
       allResults.push(...data.results)
     }
 
-    console.log("Toutes les séries: ", allResults)
+    // console.log("Toutes les séries: ", allResults)
     return allResults;
 
   } catch (error) {
@@ -59,7 +59,7 @@ export async function fetchBannerInfos(type = 'movies') {
     if (!data.results || data.results.length === 0) {
       throw new Error('Aucun résultat trouvé dans les données retournées.');
     }
-    console.log("Banner info from fetch: ",data.results[0]);
+    // console.log("Banner info from fetch: ",data.results[0]);
     return data.results[0];
   } catch (error) {
     console.error('Erreur dans fetchBannerInfos:', error.message);
@@ -88,7 +88,7 @@ export async function fetchMovies(totalPages = 6) {
       allResults.push(...data.results)
     }
 
-    console.log("Tous les films: ", allResults)
+    // console.log("Tous les films: ", allResults)
     return allResults;
 
   } catch (error) {
