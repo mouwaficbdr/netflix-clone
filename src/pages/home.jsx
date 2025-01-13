@@ -3,11 +3,12 @@ import { JumbotronContainer } from "../containers/jumbotron"
 import { FooterContainer } from "../containers/footer"
 import { HeaderContainer} from "../containers/header"
 import { Feature, OptForm } from "../components"
+import { Wrapper } from "../components"
 
 export default function Home() {
   return (
-    <>
-      <HeaderContainer>
+    <Wrapper>
+      <HeaderContainer animate={true}>
           <Feature>
             <Feature.Title>Unlimited films, TV programmes and more.</Feature.Title>
             <Feature.SubTitle>Watch anywhere. Cancel at any time.</Feature.SubTitle>
@@ -15,10 +16,6 @@ export default function Home() {
                 <OptForm.Input placeholder="Email Address" />
                 <OptForm.Button>Try it Now</OptForm.Button>
                 <OptForm.Break />
-                <OptForm.Text>
-                  Ready to watch? Enter your email to create or restart your
-                  membership.
-                </OptForm.Text>
             </OptForm>
           </Feature>
       </HeaderContainer>
@@ -26,6 +23,6 @@ export default function Home() {
       <JumbotronContainer />
       <FaqsContainer />
       <FooterContainer />
-    </>
+    </Wrapper>
   );
 }
