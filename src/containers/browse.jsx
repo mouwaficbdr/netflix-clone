@@ -7,25 +7,31 @@ import { SelectProfileContainer } from './profiles';
 import { FooterContainer } from './footer';
 import { getAuth, signOut, onAuthStateChanged } from 'firebase/auth';
 import { fetchBannerInfos } from '../utils/fetchTmdb';
+import { truncateText } from '../hooks';
 
-export default function BrowseContainer({ slides, loadingSeries, loadingMovies }) {
+export default function BrowseContainer({
+  slides,
+  loadingSeries,
+  loadingMovies,
+}) {
   const [profile, setProfile] = useState({});
   const [category, setCategory] = useState('movies');
   const [loading, setLoading] = useState(true);
   // eslint-disable-next-line no-unused-vars
-  const [areMoviesLoading, setAreMoviesLoading] = useState(loadingMovies) 
+  const [areMoviesLoading, setAreMoviesLoading] = useState(loadingMovies);
   // eslint-disable-next-line no-unused-vars
-  const [areSeriesLoading, setAreSeriesLoading] = useState(loadingSeries) 
+  const [areSeriesLoading, setAreSeriesLoading] = useState(loadingSeries);
   const [searchTerm, setSearchTerm] = useState('');
   const [slideRows, setSlideRows] = useState([]);
   const [user, setUser] = useState({ displayName: '', photoURL: '' });
   const [bannerInfos, setBannerInfos] = useState({});
-  
+  const [truncatedOverview, setTruncatedOverview] = useState('');
+  const [windowWidth, setWindowidth] = useState(window.innerWidth);
 
   /* VARIABLES LOCALES */
-  const areCurrentlyLoading = category === "series" ? areSeriesLoading : areMoviesLoading
+  const areCurrentlyLoading =
+    category === 'series' ? areSeriesLoading : areMoviesLoading;
   const BASE_URL = 'https://image.tmdb.org/t/p/w780';
-  
 
   /* Infos de base en cas de problème de chargement */
   const defaultBannerDescription =
@@ -34,8 +40,7 @@ export default function BrowseContainer({ slides, loadingSeries, loadingMovies }
     'masks -- the one he paints for his day job as a clown, and the guise ' +
     'he projects in a futile attempt to feel like he is part of the world ' +
     'around him.';
-  const defaultBannerImage = "joker1"
-
+  const defaultBannerImage = 'joker1';
   const auth = getAuth(); // Obtenir l'instance d'authentification
 
   /* UseEffects */
@@ -53,7 +58,24 @@ export default function BrowseContainer({ slides, loadingSeries, loadingMovies }
       }
     }
     fetchBanner();
-  }, [category])
+  }, [category]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    // Nettoyage de l'écouteur d'événements
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    setTruncatedOverview(truncateText(bannerInfos.overview));
+  }, [bannerInfos, windowWidth]);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -74,7 +96,7 @@ export default function BrowseContainer({ slides, loadingSeries, loadingMovies }
     setTimeout(() => {
       setLoading(false);
     }, 3000);
-  }, []); 
+  }, []);
 
   useEffect(() => {
     const fuse = new Fuse(slideRows, {
@@ -117,7 +139,13 @@ export default function BrowseContainer({ slides, loadingSeries, loadingMovies }
   /* FIN DES FONCTIONS UTILITAIRES */
 
   return profile.displayName ? (
-    <div style={{ backgroundColor: '#151515' }}>
+    <div
+      style={{
+        backgroundColor: '#151515',
+        margin: '-8px',
+        overflowX: 'hidden',
+      }}
+    >
       {loading ? (
         <Loading>
           <Loading.Picture src={`${user.photoURL}`} />
@@ -131,7 +159,6 @@ export default function BrowseContainer({ slides, loadingSeries, loadingMovies }
             ? `https://image.tmdb.org/t/p/original/${bannerInfos.backdrop_path}`
             : defaultBannerImage
         }
-        dontShowOnSmallViewPort
       >
         <Header.Frame>
           <Header.Group>
@@ -183,7 +210,7 @@ export default function BrowseContainer({ slides, loadingSeries, loadingMovies }
           </Header.FeatureCallOut>
           <Header.Text>
             {bannerInfos.overview
-              ? bannerInfos.overview
+              ? truncatedOverview
               : defaultBannerDescription}
           </Header.Text>
           <Header.PlayButton>Play</Header.PlayButton>
@@ -192,30 +219,33 @@ export default function BrowseContainer({ slides, loadingSeries, loadingMovies }
 
       <Card.Group>
         {slideRows.map((slideItem) => {
-          
-          return areCurrentlyLoading ? (
-            <Loading key={slideItem.id}></Loading>
-          ) : shouldDisplay(slideItem.data) ? (
+          return shouldDisplay(slideItem.data) ? (
             <Card key={`${category}-${slideItem.title.toLowerCase()}`}>
-              <Card.Title>{slideItem.title}</Card.Title>
-              <Carousel
-                items={slideItem.data} // Liste des films ou séries
-                renderCard={(item) => (
-                  <Card.Item
-                    key={item.id}
-                    item={item}
-                    backgroundImage={`${BASE_URL}${item.poster_path}`}
+              {areCurrentlyLoading ? (
+                <Loading key={slideItem.id}></Loading>
+              ) : (
+                <>
+                  <Card.Title>{slideItem.title}</Card.Title>
+                  <Carousel
+                    items={slideItem.data} // Liste des films ou séries
+                    renderCard={(item) => (
+                      <Card.Item
+                        key={item.id}
+                        item={item}
+                        backgroundImage={`${BASE_URL}${item.poster_path}`}
+                      />
+                    )}
+                    containerClass="custom-slider-class" // Optionnel : classe CSS supplémentaire
+                    itemClass="custom-item-class" // Optionnel : classe CSS supplémentaire
                   />
-                )}
-                containerClass="custom-slider-class" // Optionnel : classe CSS supplémentaire
-                itemClass="custom-item-class" // Optionnel : classe CSS supplémentaire
-              />
-              <Card.Feature category={category}>
-                <Player>
-                  <Player.Button />
-                  <Player.Video />
-                </Player>
-              </Card.Feature>
+                  <Card.Feature category={category}>
+                    <Player>
+                      <Player.Button />
+                      <Player.Video />
+                    </Player>
+                  </Card.Feature>
+                </>
+              )}
             </Card>
           ) : null;
         })}
