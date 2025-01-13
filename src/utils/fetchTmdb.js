@@ -59,8 +59,8 @@ export async function fetchBannerInfos(type = 'movies') {
     if (!data.results || data.results.length === 0) {
       throw new Error('Aucun résultat trouvé dans les données retournées.');
     }
-    // console.log("Banner info from fetch: ",data.results[0]);
-    return data.results[0];
+    // Retourner un résultat aléatoire entre 0 et 3
+    return data.results[Math.floor(Math.random() * 5)];
   } catch (error) {
     console.error('Erreur dans fetchBannerInfos:', error.message);
     return null; // Retourne une valeur par défaut explicite
