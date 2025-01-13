@@ -3,8 +3,7 @@
   display: flex;
   align-items: center;
   overflow: hidden;
-  margin: 20px 0;
-  
+  margin-top: -20px;
 }
 
 /* Boutons de navigation */
@@ -55,16 +54,8 @@
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   padding: 10px;
-  /* display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  width: auto;
-  min-height: fit-content;
-  min-width: fit-content;
-  margin-bottom: 12px; */
   position: relative;
   height: auto;
-
   /* Cacher le scrollbar */
   /* Pour Firefox */
   scrollbar-width: none;
@@ -81,4 +72,10 @@
 /* Chaque item */
 .carousel-item {
   scroll-snap-align: start;
+}
+
+@media (max-width: 426px) {
+  .carousel {
+    margin-top: -20px;
+  }
 }
