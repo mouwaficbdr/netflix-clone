@@ -38,7 +38,7 @@ export async function fetchBannerInfos(type = 'movies') {
 
   try {
     const response = await fetch(
-      `${BASE_URL}/${mediaType}/popular?api_key=${API_KEY}&language=fr-FR&page=1`
+      `${BASE_URL}/trending/${mediaType}/day?api_key=${API_KEY}&language=fr-FR`
     );
 
     if (!['movies', 'series'].includes(type)) {
@@ -59,8 +59,10 @@ export async function fetchBannerInfos(type = 'movies') {
     if (!data.results || data.results.length === 0) {
       throw new Error('Aucun résultat trouvé dans les données retournées.');
     }
-    // Retourner un résultat aléatoire entre 0 et 3
-    return data.results[Math.floor(Math.random() * 5)];
+    // Retourner un résultat aléatoire entre 0 et 5
+    const result = data.results[Math.floor(Math.random() * 5)];
+    console.log("Banner Series Info: ", result)
+    return result
   } catch (error) {
     console.error('Erreur dans fetchBannerInfos:', error.message);
     return null; // Retourne une valeur par défaut explicite
