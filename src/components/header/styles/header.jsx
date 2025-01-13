@@ -4,20 +4,25 @@ import { Link as ReachRouterLink } from 'react-router-dom';
 export const Background = styled.div`
   display: flex;
   flex-direction: column;
-  background: ${({ src }) =>
-    src
-      ? `url(${src}) top left / cover no-repeat`
-      : `url('/images/misc/home-bg.jpg') top left / cover no-repeat`
-      };
+  background: linear-gradient(
+      0deg,
+      #141414 0,
+      rgba(20, 20, 20, 0.8) 10%,
+      transparent
+    )
+    , ${({ src }) =>
+      src
+        ? `url(${src}) top left / cover no-repeat`
+        : `url('/images/misc/home-bg.jpg') top left / cover no-repeat`};
   background-position: center;
   background-repeat: no-repeat;
   @media (max-width: 768px) {
     height: 80vh;
   }
-  
+
   /* @media (max-width: 1100px) {
     ${({ dontShowOnSmallViewPort }) =>
-      dontShowOnSmallViewPort && 'background: none'};
+    dontShowOnSmallViewPort && 'background: none'};
   } */
 `;
 
@@ -99,7 +104,6 @@ export const Text = styled.p`
   }
 `;
 
-
 export const Feature = styled(Container)`
   padding: 150px 0 500px 0;
   flex-direction: column;
@@ -138,7 +142,6 @@ export const FeatureCallOut = styled.h2`
   @media (max-width: 768px) {
     font-size: 30px;
   }
-
 `;
 
 export const PlayButton = styled.button`
@@ -199,7 +202,7 @@ export const SearchInput = styled.input`
 `;
 
 export const Picture = styled.button`
-  background: url(${({ src }) => src ? src : "/images/users/1.png"});
+  background: url(${({ src }) => (src ? src : '/images/users/1.png')});
   background-size: contain;
   border: 0;
   width: 32px;
