@@ -34,12 +34,7 @@ export default function BrowseContainer({
   const BASE_URL = 'https://image.tmdb.org/t/p/w780';
 
   /* Infos de base en cas de problème de chargement */
-  const defaultBannerDescription =
-    'Forever alone in a crowd, failed comedian Arthur Fleck seeks ' +
-    'connection as he walks the streets of Gotham City. Arthur wears two ' +
-    'masks -- the one he paints for his day job as a clown, and the guise ' +
-    'he projects in a futile attempt to feel like he is part of the world ' +
-    'around him.';
+  const defaultBannerDescription = 'Watch it Now ! Watch it Here !';
   const defaultBannerImage = 'joker1';
   const auth = getAuth(); // Obtenir l'instance d'authentification
 
