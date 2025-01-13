@@ -17,7 +17,7 @@ export const Background = styled.div`
   background-position: center;
   background-repeat: no-repeat;
   @media (max-width: 768px) {
-    height: 80vh;
+    min-height: 80vh;
   }
 
   /* @media (max-width: 1100px) {
@@ -71,9 +71,30 @@ export const ButtonLink = styled(ReachRouterLink)`
   cursor: pointer;
   text-decoration: none;
   box-sizing: border-box;
+  animation: ${({animate}) => animate ? `shake 0.5s ease-in-out infinite`: `` };
+  animation-delay: 3s;
 
   &:hover {
     background: #f40612;
+    animation: none;
+  }
+
+  @keyframes shake {
+    0% {
+      transform: translateX(0);
+    }
+    25% {
+      transform: translateX(-5px);
+    }
+    50% {
+      transform: translateX(5px);
+    }
+    75% {
+      transform: translateX(-5px);
+    }
+    100% {
+      transform: translateX(0);
+    }
   }
 `;
 
