@@ -17,7 +17,7 @@ export const Title = styled.h2`
 
 export const Container = styled.div`
   display: flex;
-  /* margin-bottom: 46px; */
+  margin-bottom: 16px;
   box-sizing: border-box;
   flex-direction: column;
   /* min-height: 300px; */
@@ -158,13 +158,13 @@ export const Item = styled.div`
   }
 
   @media (max-width: 426px) {
-    width: 100px;
-    height: 140px;
+    width: 90px;
+    height: 150px;
   }
 
   @media (max-width: 370px) {
-    width: 100px;
-    height: 100px;
+    width: 700px;
+    height: 120px;
   }
 
   /* HOVER EFFECT */
