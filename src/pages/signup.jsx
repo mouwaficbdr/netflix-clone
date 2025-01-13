@@ -6,6 +6,7 @@ import { Form } from '../components';
 import * as ROUTES from '../constants/routes';
 import { FirebaseContext } from '../context/firebase';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { Wrapper } from "../components"
 
 export default function Signup() {
   const navigate = useNavigate()
@@ -36,7 +37,7 @@ export default function Signup() {
   };
 
   return (
-    <>
+    <Wrapper>
       <HeaderContainer>
         <Form>
           <Form.Title>Sign Up</Form.Title>
@@ -74,6 +75,6 @@ export default function Signup() {
         </Form>
       </HeaderContainer>
       <FooterContainer />
-    </>
+    </Wrapper>
   );
 }
