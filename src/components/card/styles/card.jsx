@@ -163,7 +163,7 @@ export const Item = styled.div`
   }
 
   @media (max-width: 370px) {
-    width: 700px;
+    width: 70px;
     height: 120px;
   }
 
