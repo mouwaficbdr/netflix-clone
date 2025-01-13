@@ -3,26 +3,38 @@ import styled from 'styled-components';
 export const Title = styled.h2`
   color: #e5e5e5;
   margin-left: 56px;
+  font-size: 30px;
+
+  @media (max-width: 768px) {
+    font-size: 20px;
+  }
+
+  @media (max-width: 420px) {
+    font-size: 16px;
+  }
+
 `;
 
 export const Container = styled.div`
   display: flex;
-  margin-bottom: 46px;
+  /* margin-bottom: 46px; */
   box-sizing: border-box;
   flex-direction: column;
+  /* min-height: 300px; */
+  /* background-color: red; */
   > ${Title} {
     @media (max-width: 1000px) {
       margin-left: 30px;
     }
   }
 
-  @media (max-width: 370px) {
+  /* @media (max-width: 370px) {
     margin-bottom: 10px;
   }
 
   @media (max-width: 500px) {
     margin-bottom: 10px;
-  }
+  } */
 
   &:last-of-type {
     margin-bottom: 0;
@@ -52,7 +64,7 @@ export const Group = styled.div`
 
   > ${Container}:first-of-type {
     @media (min-width: 1100px) {
-      margin-top: -200px;
+      margin-top: -150px;
     }
   }
 `;
@@ -140,14 +152,19 @@ export const Item = styled.div`
   background-size: cover;
   transition: transform 0.3s ease;
 
-  @media (max-width: 500px) {
+  @media (max-width: 768px) {
+    width: 112px;
+    height: 168px;
+  }
+
+  @media (max-width: 426px) {
     width: 100px;
-    height: 170px;
+    height: 140px;
   }
 
   @media (max-width: 370px) {
-    width: 50px;
-    height: 70px;
+    width: 100px;
+    height: 100px;
   }
 
   /* HOVER EFFECT */
