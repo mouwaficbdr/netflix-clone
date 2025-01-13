@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { Link as ReachRouterLink } from 'react-router-dom';
 
 export const Background = styled.div`
-  margin: -8px;
   display: flex;
   flex-direction: column;
   background: ${({ src }) =>
@@ -10,11 +9,16 @@ export const Background = styled.div`
       ? `url(${src}) top left / cover no-repeat`
       : `url('/images/misc/home-bg.jpg') top left / cover no-repeat`
       };
+  background-position: center;
+  background-repeat: no-repeat;
+  @media (max-width: 768px) {
+    height: 80vh;
+  }
   
-  @media (max-width: 1100px) {
+  /* @media (max-width: 1100px) {
     ${({ dontShowOnSmallViewPort }) =>
       dontShowOnSmallViewPort && 'background: none'};
-  }
+  } */
 `;
 
 export const Container = styled.div`
@@ -89,16 +93,38 @@ export const Text = styled.p`
   font-size: 22px;
   line-height: normal;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.45);
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
 `;
+
+
 export const Feature = styled(Container)`
   padding: 150px 0 500px 0;
   flex-direction: column;
   align-items: normal;
   width: 50%;
 
-  @media (max-width: 1100px) {
-    display: none;
+  @media (max-width: 768px) {
+    padding: 0;
+    width: unset;
   }
+
+  @media (max-width: 600px) {
+    padding: 100px 0;
+    width: unset;
+    margin-top: 50px;
+  }
+
+  @media (max-width: 900px) {
+    padding: 50px 0;
+    width: unset;
+  }
+
+  /* @media (max-width: 1100px) {
+    display: none;
+  } */
 `;
 
 export const FeatureCallOut = styled.h2`
@@ -108,6 +134,11 @@ export const FeatureCallOut = styled.h2`
   font-weight: bold;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.45);
   margin: 0;
+
+  @media (max-width: 768px) {
+    font-size: 30px;
+  }
+
 `;
 
 export const PlayButton = styled.button`
@@ -127,6 +158,10 @@ export const PlayButton = styled.button`
   &:hover {
     background: #ff1e1e;
     color: white;
+  }
+
+  @media (max-width: 900px) {
+    margin-top: 30px;
   }
 `;
 
