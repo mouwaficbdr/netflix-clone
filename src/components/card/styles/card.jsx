@@ -28,14 +28,6 @@ export const Container = styled.div`
     }
   }
 
-  /* @media (max-width: 370px) {
-    margin-bottom: 10px;
-  }
-
-  @media (max-width: 500px) {
-    margin-bottom: 10px;
-  } */
-
   &:last-of-type {
     margin-bottom: 0;
   }
@@ -69,16 +61,6 @@ export const Group = styled.div`
   }
 `;
 
-export const SubTitle = styled.p`
-  font-size: 12px;
-  color: white;
-  font-weight: bold;
-  margin-top: 0;
-  margin-bottom: 0;
-  user-select: none;
-  display: none;
-`;
-
 export const Text = styled.p`
   margin-top: 5px;
   font-size: 10px;
@@ -89,40 +71,6 @@ export const Text = styled.p`
   line-height: normal;
 `;
 
-
-export const Entities = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  width: auto;
-  min-height: fit-content;
-  min-width: fit-content;
-  margin-bottom: 12px;
-  position: relative;
-  height: auto;
-
-  /* Cacher le scrollbar */
-  /* Pour Firefox */
-  scrollbar-width: none;
-
-  /* Pour Internet Explorer et Edge */
-  -ms-overflow-style: none;
-
-  /* Pour Chrome, Safari et Edge */
-  &::-webkit-scrollbar {
-    display: none;
-  }
-`;
-
-
-
-export const Meta = styled.div`
-  display: none;
-  position: absolute;
-  bottom: 0;
-  padding: 10px;
-  background-color: #0000008f;
-`;
 
 export const Image = styled.img`
   border: 0;
@@ -191,47 +139,52 @@ export const Item = styled.div`
 
 /* FEATURE */
 
-export const FeatureText = styled.p`
-  font-size: 18px;
-  color: white;
-  font-weight: ${({ fontWeight }) => {
-    fontWeight === 'bold' ? 'bold' : 'normal';
-  }};
-  margin: 0;
+export const Feature = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  max-width: 80vw;
+  max-height: 80vh;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`;
 
-  @media (max-width: 800px) {
-    line-height: 22px;
+export const FeatureText = styled.p`
+  margin-top: 5px;
+  font-size: 10px;
+  color: white;
+  margin-bottom: 0;
+  user-select: none;
+  display: none;
+  line-height: normal;
+
+  > span{
+    color: #ffffff5b;
   }
 `;
 
-export const Feature = styled.div`
+export const FeatureImage = styled.img`
+  width: 100%;
+  height: 00px;
+`;
+
+export const FeatureContent = styled.div`
   display: flex;
-  flex-direction: row;
-  background: url(${({ src }) => src});
-  background-size: contain;
-  position: relative;
-  height: 360px;
-  background-position-x: right;
-  background-repeat: no-repeat;
-  background-color: black;
-
-  @media (max-width: 1000px) {
-    height: auto;
-    background-size: auto;
-
-    ${Title} {
-      font-size: 20px;
-      line-height: 20px;
-      margin-bottom: 10px;
-    }
-    ${FeatureText} {
-      font-size: 14px;
-    }
-  }
+  justify-content: space-between;
 `;
 
 export const FeatureTitle = styled(Title)`
-  margin-left: 0;
+  width: 100%;
+`;
+
+export const FeatureDescription = styled.div`
+`;
+
+export const FeatureAdditionalInfos = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 
 export const FeatureClose = styled.button`
@@ -249,26 +202,26 @@ export const FeatureClose = styled.button`
   }
 `;
 
-export const Content = styled.div`
-  margin: 56px;
-  max-width: 500px;
-  line-height: normal;
+// export const Content = styled.div`
+//   margin: 56px;
+//   max-width: 500px;
+//   line-height: normal;
 
-  @media (max-width: 1000px) {
-    margin: 30px;
-    max-width: none;
-  }
-`;
+//   @media (max-width: 1000px) {
+//     margin: 30px;
+//     max-width: none;
+//   }
+// `;
 
-export const Maturity = styled.div`
-  background-color: ${({ rating }) => (rating >= 15 ? 'red' : 'green')};
-  border-radius: 15px;
-  width: 20px;
-  padding: 5px;
-  text-align: center;
-  color: white;
-  font-weight: bold;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-  margin-right: 10px;
-  font-size: 12px;
-`;
+// export const Maturity = styled.div`
+//   background-color: ${({ rating }) => (rating >= 15 ? 'red' : 'green')};
+//   border-radius: 15px;
+//   width: 20px;
+//   padding: 5px;
+//   text-align: center;
+//   color: white;
+//   font-weight: bold;
+//   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+//   margin-right: 10px;
+//   font-size: 12px;
+// `;
