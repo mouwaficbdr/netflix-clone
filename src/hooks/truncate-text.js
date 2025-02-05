@@ -15,10 +15,3 @@ export default function truncateText(text) {
       return truncated.length < text.length ? truncated + '...' : truncated;
   }
 }
-
-// Exemple d'utilisation
-const longText =
-  "Voici un texte très long qui doit être tronqué en fonction de la taille de l'écran...";
-const truncatedText = truncateText(longText);
-
-console.log(truncatedText);
