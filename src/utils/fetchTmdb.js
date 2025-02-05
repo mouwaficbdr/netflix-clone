@@ -61,7 +61,7 @@ export async function fetchBannerInfos(type = 'movies') {
     }
     // Retourner un résultat aléatoire entre 0 et 5
     const result = data.results[Math.floor(Math.random() * 5)];
-    console.log("Banner Series Info: ", result)
+    // console.log("Banner Series Info: ", result)
     return result
   } catch (error) {
     console.error('Erreur dans fetchBannerInfos:', error.message);
@@ -100,6 +100,7 @@ export async function fetchMovies(totalPages = 6) {
 
 // Fonction pour récupérer les genres
 export async function fetchGenres(type = 'movie') {
+  
   try {
     const response = await fetch(
       `${BASE_URL}/genre/${type}/list?api_key=${API_KEY}&language=fr-FR`
