@@ -7,7 +7,8 @@ export function SelectProfileContainer({ user, setProfile }) {
     <Profiles.PageWrapper>
       <Header bg={false}>
         <Header.Frame>
-          <Header.Logo to={ROUTES.HOME}
+          <Header.Logo
+            to={ROUTES.HOME}
             src="/images/misc/logo.svg"
             alt="Netflix"
           />
@@ -17,10 +18,14 @@ export function SelectProfileContainer({ user, setProfile }) {
         <Profiles.Title>Who is watching?</Profiles.Title>
         <Profiles.List>
           <Profiles.User
-            onClick={() => setProfile({
-              displayName: user.displayName,
-              photoURL : user.photoURL
-            })}
+            onClick={() => {
+              const newProfile = {
+                displayName: user.displayName,
+                photoURL: user.photoURL,
+              };
+              localStorage.setItem('profile', JSON.stringify(newProfile));
+              setProfile(newProfile);
+            }}
           >
             <Profiles.Picture src={user.photoURL} />
             <Profiles.Name>{user.displayName}</Profiles.Name>
@@ -28,5 +33,5 @@ export function SelectProfileContainer({ user, setProfile }) {
         </Profiles.List>
       </Profiles>
     </Profiles.PageWrapper>
-  )
+  );
 }
