@@ -14,7 +14,9 @@ export default function BrowseContainer({
   loadingSeries,
   loadingMovies,
 }) {
-  const [profile, setProfile] = useState({});
+  const [profile, setProfile] = useState(() => {
+    return JSON.parse(localStorage.getItem('profile')) || {};
+  });
   const [category, setCategory] = useState('movies');
   const [loading, setLoading] = useState(true);
   // eslint-disable-next-line no-unused-vars
@@ -27,6 +29,8 @@ export default function BrowseContainer({
   const [bannerInfos, setBannerInfos] = useState({});
   const [truncatedOverview, setTruncatedOverview] = useState('');
   const [windowWidth, setWindowidth] = useState(window.innerWidth);
+  // const [showFeature, setShowFeature] = useState(false);
+  const [selectedItemId, setSelectedItemId] = useState(null);
 
   /* VARIABLES LOCALES */
   const areCurrentlyLoading =
@@ -40,6 +44,12 @@ export default function BrowseContainer({
 
   /* UseEffects */
 
+
+useEffect(() => {
+  localStorage.setItem('profile', JSON.stringify(profile));
+
+}, [profile]); 
+  
   useEffect(() => {
     async function fetchBanner() {
       try {
@@ -121,6 +131,7 @@ export default function BrowseContainer({
   const handleSignOut = async () => {
     try {
       await signOut(auth); // Déconnexion de l'utilisateur
+      localStorage.removeItem('profile');
       console.log('Successful sign out');
     } catch (error) {
       console.error('Error during sign out:', error.message);
@@ -130,6 +141,7 @@ export default function BrowseContainer({
   function shouldDisplay(movies, minCount = 5) {
     return Array.isArray(movies) && movies.length >= minCount;
   }
+
 
   /* FIN DES FONCTIONS UTILITAIRES */
 
@@ -215,7 +227,11 @@ export default function BrowseContainer({
       <Card.Group>
         {slideRows.map((slideItem) => {
           return shouldDisplay(slideItem.data) ? (
-            <Card key={`${category}-${slideItem.title.toLowerCase()}`}>
+            <Card
+              key={`${category}-${slideItem.title.toLowerCase()}`}
+              selectedItemId={selectedItemId}
+              setSelectedItemId={setSelectedItemId}
+            >
               {areCurrentlyLoading ? (
                 <Loading key={slideItem.id}></Loading>
               ) : (
@@ -224,21 +240,26 @@ export default function BrowseContainer({
                   <Carousel
                     items={slideItem.data} // Liste des films ou séries
                     renderCard={(item) => (
-                      <Card.Item
-                        key={item.id}
-                        item={item}
-                        backgroundImage={`${BASE_URL}${item.poster_path}`}
-                      />
+                      <>
+                        <Card.Item
+                          key={item.id}
+                          backgroundImage={`${BASE_URL}${item.poster_path}`}
+                          onClick={() => setSelectedItemId(item.id)}
+                        />
+                        <Card.Feature
+                          src={`${BASE_URL}${item.poster_path}`}
+                          item={item}
+                        >
+                          <Player>
+                            <Player.Button />
+                            <Player.Video />
+                          </Player>
+                        </Card.Feature>
+                      </>
                     )}
                     containerClass="custom-slider-class" // Optionnel : classe CSS supplémentaire
                     itemClass="custom-item-class" // Optionnel : classe CSS supplémentaire
                   />
-                  <Card.Feature category={category}>
-                    <Player>
-                      <Player.Button />
-                      <Player.Video />
-                    </Player>
-                  </Card.Feature>
                 </>
               )}
             </Card>
