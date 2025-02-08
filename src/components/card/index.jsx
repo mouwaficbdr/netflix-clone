@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useContext, createContext } from 'react';
+import { truncateText } from '../../hooks';
 
 import {
   Container,
@@ -7,6 +8,7 @@ import {
   Title,
   Text,
   Feature,
+  FeatureClose,
   FeatureImage,
   FeatureText,
   FeatureContent,
@@ -15,6 +17,7 @@ import {
   FeatureAdditionalInfos,
   Item,
   Image,
+  Overlay,
 } from './styles/card';
 
 const FeatureContext = createContext();
@@ -65,29 +68,37 @@ Card.Image = function CardImage({ ...restProps }) {
 
 // eslint-disable-next-line no-unused-vars
 Card.Feature = function CardFeature({ children, item, src, ...restProps }) {
-  const { selectedItemId } = useContext(FeatureContext);
+  const { selectedItemId, setSelectedItemId } = useContext(FeatureContext);
+  // console.log(selectedItemId ? (item.id === selectedItemId ? item : "" ) : "" )
   return selectedItemId === item.id ? (
-    <Feature {...restProps}>
-      <FeatureImage src={src} />
-      <FeatureContent>
-        <FeatureDescription>
-          <FeatureTitle>{item.title ? item.title : item.name}</FeatureTitle>
-          <FeatureText>{item.overview ? item.overview : ''}</FeatureText>
-        </FeatureDescription>
-        <FeatureAdditionalInfos>
-          <FeatureText>
-            <span>Sortie :</span>
-            {item.release_date ? item.release_date : item.first_air_date}
-          </FeatureText>
-          <FeatureText>
-            <span>Note Moyenne :</span>
-            {item.vote_average}
-          </FeatureText>
-          {/* <FeatureText>
-            <span>Genres :</span>
-          </FeatureText> */}
-        </FeatureAdditionalInfos>
-      </FeatureContent>
-    </Feature>
+    <Overlay onClick={() => setSelectedItemId(null)}>
+      <Feature onClick={(e) => e.stopPropagation()} {...restProps}>
+        <FeatureImage>
+          <img src={src} alt={`${item.title ? item.title : item.name} cover image`} />
+          <FeatureClose onClick={() => setSelectedItemId(null)}>
+            <img src="/public/images/icons/close.png" alt="Close button" />
+          </FeatureClose>
+        </FeatureImage>
+        <FeatureContent>
+          <FeatureDescription>
+            <FeatureTitle>{item.title ? item.title : item.name}</FeatureTitle>
+            <FeatureText>{item.overview ? truncateText(item.overview) : ''}</FeatureText>
+          </FeatureDescription>
+          <FeatureAdditionalInfos>
+            <FeatureText>
+              <span>Sortie :</span>
+              {item.release_date ? item.release_date : item.first_air_date}
+            </FeatureText>
+            <FeatureText>
+              <span>Note Moyenne :</span>
+              {item.vote_average.toFixed(2)}
+            </FeatureText>
+            {/* <FeatureText>
+              <span>Genres :</span>
+            </FeatureText> */}
+          </FeatureAdditionalInfos>
+        </FeatureContent>
+      </Feature>
+    </Overlay>
   ) : null;
 };
