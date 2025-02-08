@@ -247,7 +247,7 @@ useEffect(() => {
                           onClick={() => setSelectedItemId(item.id)}
                         />
                         <Card.Feature
-                          src={`${BASE_URL}${item.poster_path}`}
+                          src={`${BASE_URL}${item.backdrop_path}`}
                           item={item}
                         >
                           <Player>
