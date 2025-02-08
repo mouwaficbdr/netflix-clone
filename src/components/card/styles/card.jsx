@@ -12,7 +12,6 @@ export const Title = styled.h2`
   @media (max-width: 420px) {
     font-size: 16px;
   }
-
 `;
 
 export const Container = styled.div`
@@ -71,7 +70,6 @@ export const Text = styled.p`
   line-height: normal;
 `;
 
-
 export const Image = styled.img`
   border: 0;
   width: 100%;
@@ -89,6 +87,7 @@ export const Image = styled.img`
 
 export const Item = styled.div`
   margin-right: 10px;
+  aspect-ratio: 4/3;
   cursor: pointer;
   border-radius: 10px;
   width: 212px;
@@ -139,16 +138,52 @@ export const Item = styled.div`
 
 /* FEATURE */
 
+export const Overlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-out forwards;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+`;
+
 export const Feature = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 10px;
-  max-width: 80vw;
-  max-height: 80vh;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  min-height: 180px;
+  background-color: #141414;
+  border-radius: 10px;
+  position: relative;
+  animation: scaleUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  transform-origin: center center;
+  margin: 20px;
+  max-width: 800px;
+  width: 90%;
+
+  @keyframes scaleUp {
+    from {
+      transform: scale(0.9);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
 `;
 
 export const FeatureText = styled.p`
@@ -160,26 +195,62 @@ export const FeatureText = styled.p`
   display: none;
   line-height: normal;
 
-  > span{
+  > span {
     color: #ffffff5b;
   }
 `;
 
-export const FeatureImage = styled.img`
-  width: 100%;
-  height: 00px;
+export const FeatureImage = styled.div`
+  padding-bottom: 5px;
+  height: auto;
+  aspect-ratio: 16/9;
+  position: relative;
+  border-radius: 10px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      0deg,
+      #141414 0,
+      rgba(20, 20, 20, 0.8) 10%,
+      transparent
+    );
+    pointer-events: none;
+  }
 `;
 
 export const FeatureContent = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
+  align-content: flex-start;
+  max-width: 100%;
+  padding: 10px 20px;
 `;
 
 export const FeatureTitle = styled(Title)`
   width: 100%;
+  margin-left: 0;
 `;
 
 export const FeatureDescription = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
 `;
 
 export const FeatureAdditionalInfos = styled.div`
@@ -190,8 +261,8 @@ export const FeatureAdditionalInfos = styled.div`
 export const FeatureClose = styled.button`
   color: white;
   position: absolute;
-  right: 20px;
-  top: 20px;
+  right: 10px;
+  top: 10px;
   cursor: pointer;
   background-color: transparent;
   border: 0;
