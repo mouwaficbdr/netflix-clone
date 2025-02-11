@@ -188,16 +188,20 @@ export const Feature = styled.div`
 
 export const FeatureText = styled.p`
   margin-top: 5px;
-  font-size: 10px;
+  font-size: 14px !important;
   color: white;
   margin-bottom: 0;
   user-select: none;
-  display: none;
   line-height: normal;
 
   > span {
     color: #ffffff5b;
   }
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+  }
+
 `;
 
 export const FeatureImage = styled.div`
@@ -234,16 +238,21 @@ export const FeatureImage = styled.div`
 
 export const FeatureContent = styled.div`
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
-  align-content: flex-start;
+  align-items: center;
   max-width: 100%;
-  padding: 10px 20px;
+  padding: 20px 40px;
+
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 export const FeatureTitle = styled(Title)`
   width: 100%;
   margin-left: 0;
+  margin-top: 0;
 `;
 
 export const FeatureDescription = styled.div`
@@ -251,11 +260,25 @@ export const FeatureDescription = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
+  width: 60%;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+
 `;
 
 export const FeatureAdditionalInfos = styled.div`
   display: flex;
   flex-direction: column;
+  width: 30%;
+  /* margin-top: 20px; */
+
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+
 `;
 
 export const FeatureClose = styled.button`
