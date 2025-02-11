@@ -86,11 +86,11 @@ Card.Feature = function CardFeature({ children, item, src, ...restProps }) {
           </FeatureDescription>
           <FeatureAdditionalInfos>
             <FeatureText>
-              <span>Sortie :</span>
+              <span>Sortie : </span>
               {item.release_date ? item.release_date : item.first_air_date}
             </FeatureText>
             <FeatureText>
-              <span>Note Moyenne :</span>
+              <span>Note Moyenne : </span>
               {item.vote_average.toFixed(2)}
             </FeatureText>
             {/* <FeatureText>
