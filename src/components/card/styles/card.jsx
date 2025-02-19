@@ -172,7 +172,7 @@ export const Feature = styled.div`
   transform-origin: center center;
   margin: 20px;
   max-width: 800px;
-  width: 90%;
+  width: 80%;
 
   @keyframes scaleUp {
     from {
@@ -261,6 +261,7 @@ export const FeatureDescription = styled.div`
   justify-content: space-between;
   align-items: flex-start;
   width: 60%;
+  margin-bottom: 20px;
 
   @media (max-width: 768px) {
     width: 100%;
