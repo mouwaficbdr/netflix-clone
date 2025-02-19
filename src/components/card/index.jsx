@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import { useContext, createContext } from 'react';
-import { truncateText } from '../../hooks';
 
 import {
   Container,
@@ -82,7 +81,7 @@ Card.Feature = function CardFeature({ children, item, src, ...restProps }) {
         <FeatureContent>
           <FeatureDescription>
             <FeatureTitle>{item.title ? item.title : item.name}</FeatureTitle>
-            <FeatureText>{item.overview ? truncateText(item.overview) : ''}</FeatureText>
+            <FeatureText>{item.overview ? item.overview : ''}</FeatureText>
           </FeatureDescription>
           <FeatureAdditionalInfos>
             <FeatureText>
