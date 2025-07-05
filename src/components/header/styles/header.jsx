@@ -79,15 +79,20 @@ export const ButtonLink = styled(ReachRouterLink)`
 
   @keyframes halo {
     0% {
-      box-shadow: 0 0 5px rgba(229, 9, 20, 0.3);
+      box-shadow:
+        0 0 15px rgba(229, 9, 20, 0.6),
+        0 0 30px rgba(229, 9, 20, 0.3);
     }
     50% {
       box-shadow:
-        0 0 25px rgba(229, 9, 20, 0.8),
-        0 0 35px rgba(229, 9, 20, 0.4);
+        0 0 40px rgba(229, 9, 20, 1),
+        0 0 60px rgba(229, 9, 20, 0.8),
+        0 0 80px rgba(229, 9, 20, 0.5);
     }
     100% {
-      box-shadow: 0 0 5px rgba(229, 9, 20, 0.3);
+      box-shadow:
+        0 0 15px rgba(229, 9, 20, 0.6),
+        0 0 30px rgba(229, 9, 20, 0.3);
     }
   }
 `;
