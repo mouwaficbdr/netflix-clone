@@ -1,16 +1,12 @@
-import styled from 'styled-components';
-import { Link as ReachRouterLink } from 'react-router-dom';
+import styled from "styled-components";
+import { Link as ReachRouterLink } from "react-router-dom";
 
 export const Background = styled.div`
   display: flex;
   flex-direction: column;
-  background: linear-gradient(
-      0deg,
-      #141414 0,
-      rgba(20, 20, 20, 0.8) 10%,
-      transparent
-    )
-    , ${({ src }) =>
+  background:
+    linear-gradient(0deg, #141414 0, rgba(20, 20, 20, 0.8) 10%, transparent),
+    ${({ src }) =>
       src
         ? `url(${src}) top left / cover no-repeat`
         : `url('/images/misc/home-bg.jpg') top left / cover no-repeat`};
@@ -22,7 +18,7 @@ export const Background = styled.div`
 
   /* @media (max-width: 1100px) {
     ${({ dontShowOnSmallViewPort }) =>
-    dontShowOnSmallViewPort && 'background: none'};
+    dontShowOnSmallViewPort && "background: none"};
   } */
 `;
 
@@ -46,8 +42,8 @@ export const Container = styled.div`
 export const Link = styled.p`
   text-decoration: none;
   margin-right: 30px;
-  font-weight: ${({ active }) => (active ? '700' : 'normal')};
-  color: ${({ active }) => (active ? '#e50914' : '#fff')};
+  font-weight: ${({ active }) => (active ? "700" : "normal")};
+  color: ${({ active }) => (active ? "#e50914" : "#fff")};
   cursor: pointer;
 
   &:hover {
@@ -71,29 +67,32 @@ export const ButtonLink = styled(ReachRouterLink)`
   cursor: pointer;
   text-decoration: none;
   box-sizing: border-box;
-  animation: ${({animate}) => animate ? `shake 0.5s ease-in-out infinite`: `` };
+  animation: ${({ animate }) =>
+    animate ? `halo 2s ease-in-out infinite` : ``};
   animation-delay: 3s;
 
   &:hover {
     background: #f40612;
     animation: none;
+    box-shadow: 0 0 20px rgba(229, 9, 20, 0.8);
   }
 
-  @keyframes shake {
+  @keyframes halo {
     0% {
-      transform: translateX(0);
-    }
-    25% {
-      transform: translateX(-5px);
+      box-shadow:
+        0 0 15px rgba(229, 9, 20, 0.6),
+        0 0 30px rgba(229, 9, 20, 0.3);
     }
     50% {
-      transform: translateX(5px);
-    }
-    75% {
-      transform: translateX(-5px);
+      box-shadow:
+        0 0 40px rgba(229, 9, 20, 1),
+        0 0 60px rgba(229, 9, 20, 0.8),
+        0 0 80px rgba(229, 9, 20, 0.5);
     }
     100% {
-      transform: translateX(0);
+      box-shadow:
+        0 0 15px rgba(229, 9, 20, 0.6),
+        0 0 30px rgba(229, 9, 20, 0.3);
     }
   }
 `;
@@ -216,14 +215,14 @@ export const SearchInput = styled.input`
   transition: width 0.5s;
   height: 30px;
   font-size: 14px;
-  margin-left: ${({ active }) => (active === true ? '10px' : '0')};
-  padding: ${({ active }) => (active === true ? '0 10px' : '0')};
-  opacity: ${({ active }) => (active === true ? '1' : '0')};
-  width: ${({ active }) => (active === true ? '200px' : '0')};
+  margin-left: ${({ active }) => (active === true ? "10px" : "0")};
+  padding: ${({ active }) => (active === true ? "0 10px" : "0")};
+  opacity: ${({ active }) => (active === true ? "1" : "0")};
+  width: ${({ active }) => (active === true ? "200px" : "0")};
 `;
 
 export const Picture = styled.button`
-  background: url(${({ src }) => (src ? src : '/images/users/1.png')});
+  background: url(${({ src }) => (src ? src : "/images/users/1.png")});
   background-size: contain;
   border: 0;
   width: 32px;
