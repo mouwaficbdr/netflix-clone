@@ -8,7 +8,7 @@ import { Wrapper } from "../components"
 export default function Home() {
   return (
     <Wrapper>
-      <HeaderContainer animate={true}>
+      <HeaderContainer animate={"true"}>
           <Feature>
             <Feature.Title>Unlimited films, TV programmes and more.</Feature.Title>
             <Feature.SubTitle>Watch anywhere. Cancel at any time.</Feature.SubTitle>
