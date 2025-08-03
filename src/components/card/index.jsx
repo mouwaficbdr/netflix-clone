@@ -73,7 +73,10 @@ Card.Feature = function CardFeature({ children, item, src, ...restProps }) {
     <Overlay onClick={() => setSelectedItemId(null)}>
       <Feature onClick={(e) => e.stopPropagation()} {...restProps}>
         <FeatureImage>
-          <img src={src} alt={`${item.title ? item.title : item.name} cover image`} />
+          <img
+            src={src}
+            alt={`${item.title ? item.title : item.name} cover image`}
+          />
           <FeatureClose onClick={() => setSelectedItemId(null)}>
             <img src="/images/icons/close.png" alt="Close button" />
           </FeatureClose>
@@ -90,8 +93,11 @@ Card.Feature = function CardFeature({ children, item, src, ...restProps }) {
             </FeatureText>
             <FeatureText>
               <span>Note Moyenne : </span>
-              {item.vote_average.toFixed(2)}
+              <span className="note">{item.vote_average.toFixed(2)}</span>
             </FeatureText>
+            {item.title === 'Superman'
+              ? console.log(item)
+              : console.log('Dohi 1 fois')}
             {/* <FeatureText>
               <span>Genres :</span>
             </FeatureText> */}

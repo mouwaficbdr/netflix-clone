@@ -55,7 +55,7 @@ export const Group = styled.div`
 
   > ${Container}:first-of-type {
     @media (min-width: 1100px) {
-      margin-top: -150px;
+      margin-top: -70px;
     }
   }
 `;
@@ -196,6 +196,11 @@ export const FeatureText = styled.p`
 
   > span {
     color: #ffffff5b;
+  }
+
+  > .note{
+    font-weight: bold;
+    color: #33EB91;
   }
 
   @media (max-width: 768px) {
