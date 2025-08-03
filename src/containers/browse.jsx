@@ -175,13 +175,13 @@ useEffect(() => {
               alt="Netflix"
             />
             <Header.Link
-              active={category === 'series'}
+              $active={category === 'series'}
               onClick={() => setCategory('series')}
             >
               Series
             </Header.Link>
             <Header.Link
-              active={category === 'movies'}
+              $active={category === 'movies'}
               onClick={() => setCategory('movies')}
             >
               Films
@@ -243,7 +243,7 @@ useEffect(() => {
                       <>
                         <Card.Item
                           key={item.id}
-                          backgroundImage={`${BASE_URL}${item.poster_path}`}
+                          $backgroundImage={`${BASE_URL}${item.poster_path}`}
                           onClick={() => setSelectedItemId(item.id)}
                         />
                         <Card.Feature

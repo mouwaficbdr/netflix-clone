@@ -93,7 +93,7 @@ export const Item = styled.div`
   width: 212px;
   height: 314px;
   position: relative;
-  background: url(${({ backgroundImage }) => backgroundImage});
+  background: url(${({ $backgroundImage }) => $backgroundImage});
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

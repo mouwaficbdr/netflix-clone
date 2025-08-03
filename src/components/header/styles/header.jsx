@@ -42,8 +42,8 @@ export const Container = styled.div`
 export const Link = styled.p`
   text-decoration: none;
   margin-right: 30px;
-  font-weight: ${({ active }) => (active ? "700" : "normal")};
-  color: ${({ active }) => (active ? "#e50914" : "#fff")};
+  font-weight: ${({ $active }) => ($active ? "700" : "normal")};
+  color: ${({ $active }) => ($active ? "#e50914" : "#fff")};
   cursor: pointer;
 
   &:hover {
@@ -215,10 +215,10 @@ export const SearchInput = styled.input`
   transition: width 0.5s;
   height: 30px;
   font-size: 14px;
-  margin-left: ${({ active }) => (active === true ? "10px" : "0")};
-  padding: ${({ active }) => (active === true ? "0 10px" : "0")};
-  opacity: ${({ active }) => (active === true ? "1" : "0")};
-  width: ${({ active }) => (active === true ? "200px" : "0")};
+  margin-left: ${({ $active }) => ($active === true ? "10px" : "0")};
+  padding: ${({ $active }) => ($active === true ? "0 10px" : "0")};
+  opacity: ${({ $active }) => ($active === true ? "1" : "0")};
+  width: ${({ $active }) => ($active === true ? "200px" : "0")};
 `;
 
 export const Picture = styled.button`
