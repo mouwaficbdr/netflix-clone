@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
-import { useContext, createContext } from 'react';
+import { useContext, createContext, useState, useEffect } from 'react';
+import { mapGenreIdsToNames } from '../../utils/mapGenreIdsToNames';
 
 import {
   Container,
@@ -27,6 +28,7 @@ export default function Card({
   setSelectedItemId,
   ...restProps
 }) {
+  
   return (
     <FeatureContext.Provider value={{ selectedItemId, setSelectedItemId }}>
       <Container {...restProps}>{children}</Container>
@@ -66,14 +68,33 @@ Card.Image = function CardImage({ ...restProps }) {
 };
 
 // eslint-disable-next-line no-unused-vars
-Card.Feature = function CardFeature({ children, item, src, ...restProps }) {
+Card.Feature = function CardFeature({ children, item, src, category, ...restProps }) {
   const { selectedItemId, setSelectedItemId } = useContext(FeatureContext);
   // console.log(selectedItemId ? (item.id === selectedItemId ? item : "" ) : "" )
+  const type = category === "movies" ? "movie" : "tv"
+  const [genres, setGenres] = useState()
+
+
+  useEffect(() => {
+    const getGenres = async () => {
+      const genresArray = await mapGenreIdsToNames(item.genre_ids, type);
+      setGenres(genresArray)
+    }
+
+    if (item && item.genre_ids) {
+      getGenres();
+    }
+
+  }, [item.genre_ids, type, item])
+
   return selectedItemId === item.id ? (
     <Overlay onClick={() => setSelectedItemId(null)}>
       <Feature onClick={(e) => e.stopPropagation()} {...restProps}>
         <FeatureImage>
-          <img src={src} alt={`${item.title ? item.title : item.name} cover image`} />
+          <img
+            src={src}
+            alt={`${item.title ? item.title : item.name} cover image`}
+          />
           <FeatureClose onClick={() => setSelectedItemId(null)}>
             <img src="/images/icons/close.png" alt="Close button" />
           </FeatureClose>
@@ -90,11 +111,16 @@ Card.Feature = function CardFeature({ children, item, src, ...restProps }) {
             </FeatureText>
             <FeatureText>
               <span>Note Moyenne : </span>
-              {item.vote_average.toFixed(2)}
+              <span className="note">{item.vote_average.toFixed(2)}</span>
             </FeatureText>
-            {/* <FeatureText>
-              <span>Genres :</span>
-            </FeatureText> */}
+            {genres && genres.length > 0 &&
+              <FeatureText>
+                <span>Genres : </span>
+                  <span className='genres'>
+                    {genres.join(", ")}
+                  </span>
+              </FeatureText>
+            }
           </FeatureAdditionalInfos>
         </FeatureContent>
       </Feature>

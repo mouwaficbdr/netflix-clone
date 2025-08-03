@@ -55,7 +55,7 @@ export const Group = styled.div`
 
   > ${Container}:first-of-type {
     @media (min-width: 1100px) {
-      margin-top: -150px;
+      margin-top: -70px;
     }
   }
 `;
@@ -93,7 +93,7 @@ export const Item = styled.div`
   width: 212px;
   height: 314px;
   position: relative;
-  background: url(${({ backgroundImage }) => backgroundImage});
+  background: url(${({ $backgroundImage }) => $backgroundImage});
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -198,10 +198,19 @@ export const FeatureText = styled.p`
     color: #ffffff5b;
   }
 
+  > .note {
+    font-weight: bold;
+    color: #33eb91;
+  }
+
+  > .genres {
+    color: #e50914;
+    font-weight: bold;
+  }
+
   @media (max-width: 768px) {
     font-size: 12px;
   }
-
 `;
 
 export const FeatureImage = styled.div`

@@ -43,7 +43,7 @@ Header.Search = function HeaderSearch({ searchTerm, setSearchTerm, ...restProps 
         value={searchTerm}
         onChange={({ target }) => setSearchTerm(target.value)}
         placeholder="Search films and series"
-        active={searchActive}
+        $active={searchActive}
       />
     </Search >
   )
