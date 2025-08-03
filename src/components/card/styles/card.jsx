@@ -198,15 +198,19 @@ export const FeatureText = styled.p`
     color: #ffffff5b;
   }
 
-  > .note{
+  > .note {
     font-weight: bold;
-    color: #33EB91;
+    color: #33eb91;
+  }
+
+  > .genres {
+    color: #e50914;
+    font-weight: bold;
   }
 
   @media (max-width: 768px) {
     font-size: 12px;
   }
-
 `;
 
 export const FeatureImage = styled.div`

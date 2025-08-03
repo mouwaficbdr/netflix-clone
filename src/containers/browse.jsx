@@ -39,7 +39,6 @@ export default function BrowseContainer({
 
   /* Infos de base en cas de problème de chargement */
   const defaultBannerDescription = 'Watch it Now ! Watch it Here !';
-  const defaultBannerImage = 'joker1';
   const auth = getAuth(); // Obtenir l'instance d'authentification
 
   /* UseEffects */
@@ -161,11 +160,7 @@ useEffect(() => {
         <Loading.ReleaseBody />
       )}
       <Header
-        src={
-          bannerInfos.backdrop_path
-            ? `https://image.tmdb.org/t/p/original/${bannerInfos.backdrop_path}`
-            : defaultBannerImage
-        }
+        src={`https://image.tmdb.org/t/p/original/${bannerInfos.backdrop_path}`}
       >
         <Header.Frame>
           <Header.Group>
@@ -212,8 +207,7 @@ useEffect(() => {
             {bannerInfos.title
               ? bannerInfos.title
               : bannerInfos.name
-              ? bannerInfos.name
-              : 'Joker'}
+            }
           </Header.FeatureCallOut>
           <Header.Text>
             {bannerInfos.overview
@@ -249,6 +243,7 @@ useEffect(() => {
                         <Card.Feature
                           src={`${BASE_URL}${item.backdrop_path}`}
                           item={item}
+                          category={category}
                         >
                           <Player>
                             <Player.Button />
