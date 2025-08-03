@@ -75,7 +75,7 @@ Card.Feature = function CardFeature({ children, item, src, ...restProps }) {
         <FeatureImage>
           <img src={src} alt={`${item.title ? item.title : item.name} cover image`} />
           <FeatureClose onClick={() => setSelectedItemId(null)}>
-            <img src="/public/images/icons/close.png" alt="Close button" />
+            <img src="/images/icons/close.png" alt="Close button" />
           </FeatureClose>
         </FeatureImage>
         <FeatureContent>
